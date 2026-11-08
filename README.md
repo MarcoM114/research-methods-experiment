@@ -80,6 +80,7 @@ Um sicherzustellen, dass Messunterschiede ausschließlich auf die gewählte Web-
 ```text
 research-methods-experiment/
 ├── README.md                  # Projektübersicht, Research Question & Referenzstudien
+├── architektur-uebersicht.md  # Erklärung & Vor-/Nachteile von CSR/SPA, SSR und Jamstack + Lighthouse-Metriken
 ├── AGENTS.md                  # Kontext, Methodik-Vorgaben & Referenzdaten für AI-Agents & Team
 ├── naechstes-vorgehen.md      # Entscheidungs-Checkliste für das Team (Ausfüll-Template)
 ├── data/                      # Deterministischer Datengenerator (10 bis 10.000 Einträge)
@@ -92,6 +93,8 @@ research-methods-experiment/
 
 ---
 
-## 5. Nächste Schritte für das Team
+## 5. Wichtige Dokumente für das Team
 
-Bitte öffnet die Datei [`naechstes-vorgehen.md`](./naechstes-vorgehen.md), füllt die kurzen Auswahlpunkte im Team aus und gebt Bescheid – danach kann der komplette Code für die Web-Apps und die automatisierte Lighthouse-Testpipeline direkt generiert werden.
+1. **[`architektur-uebersicht.md`](./architektur-uebersicht.md):** Verständliche Übersicht für alle Teammitglieder zu den Unterschieden, Vor- und Nachteilen von **CSR (SPA mit AJAX)**, **SSR** und **Jamstack (Next.js SSG vs. Astro Islands)** sowie Erklärung aller Google-Lighthouse-Metriken.
+2. **[`naechstes-vorgehen.md`](./naechstes-vorgehen.md):** Entscheidungs-Checkliste für das Team. Bitte füllt die kurzen Auswahlpunkte gemeinsam aus und gebt Bescheid – danach kann der komplette Code für die Web-Apps und die automatisierte Lighthouse-Testpipeline direkt generiert werden.
+3. **[`AGENTS.md`](./AGENTS.md):** Technisches & methodisches Referenzdokument (inkl. den Original-Tabellenwerten von Fahrudin et al., 2025 [17] und den Vorgaben aus Vorlesung 3 & 4).
