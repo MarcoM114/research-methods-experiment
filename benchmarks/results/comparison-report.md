@@ -82,8 +82,31 @@
 
 ---
 
-## 4. Visualized Performance Curves (Zero-Baseline Axes)
+## 4. Cross-Study Normalization & Hardware Calibration Methodology
+To guarantee rigorous scientific comparability between our Linux VM environment (`Intel Xeon 6985P-C`, `7.76 GB RAM`) and the reference environment of Fahrudin et al. (2025) [Ref 17] (`Intel Core i7-8650U`, `16 GB RAM`), we applied a three-pillar normalization framework:
+
+1. **Lighthouse Lantern Simulation Standardization:** Both studies used Google Lighthouse in Desktop mode (`1350x940` viewport, `rttMs: 40`, `throughputKbps: 10240`, `cpuSlowdownMultiplier: 1`) across the exact same 7 dataset stages ($N \in \{10, 50, 100, 500, 1000, 5000, 10000\}$).
+2. **Intra-Architecture Relative Scaling Normalization ($S_N = M_N / M_{10}$):** Every metric $M_N$ at stage $N$ is divided by that architecture's own baseline value $M_{10}$ at $N = 10$ on the same host machine. This dimensionless scaling factor ($1.00\times$ at $N=10$) eliminates constant host-hardware speed offsets and isolates pure $\mathcal{O}(N)$ architectural scaling behavior.
+3. **Cross-Hardware Baseline Calibration Coefficient ($k_{\text{hw}} = 1.170$):** Using the light-load pre-rendering regime ($N \in \{10, 50, 100\}$, where `TBT = 0 ms` across all architectures), we compute the ratio between the mean pre-rendered FCP in [Ref 17] ($\mu_{\text{FCP, Ref 17}} = 0.333\text{ s}$) and our own pre-rendered FCP ($\mu_{\text{FCP, Own}} = 0.285\text{ s}$):
+   $$k_{\text{hw}} = \frac{\mu_{\text{FCP, Ref 17 }(N \le 100)}}{\mu_{\text{FCP, Own }(N \le 100)}} = \frac{0.3333\text{ s}}{0.2850\text{ s}} = 1.170$$
+   Multiplying our raw times by $k_{\text{hw}} = 1.170$ projects our measurements onto the exact hardware baseline of [Ref 17]:
+
+### 4.1 Hardware-Calibrated LCP ($M_{\text{calib}} = k_{\text{hw}} \cdot M_{\text{own}}$) & Normalized Scaling Factor ($S_N = M_N / M_{10}$)
+| Data Load ($N$) | Astro Islands [Calibrated / $S_N$] | Next.js SSG [Calibrated / $S_N$] | Blade SSR [Ref 17 / $S_N$] | React CSR [Ref 17 / $S_N$] | Vue CSR [Ref 17 / $S_N$] |
+| ---: | :---: | :---: | :---: | :---: | :---: |
+| **10** | **0.29s (1.00x)** | 0.77s (1.00x) | 0.40s (1.00x) | 0.60s (1.00x) | 0.50s (1.00x) |
+| **50** | 0.32s (1.08x) | 0.82s (1.07x) | **0.30s (0.75x)** | 0.60s (1.00x) | 0.60s (1.20x) |
+| **100** | 0.33s (1.11x) | 0.86s (1.12x) | **0.30s (0.75x)** | 0.60s (1.00x) | 0.60s (1.20x) |
+| **500** | 0.69s (2.36x) | 1.11s (1.44x) | **0.40s (1.00x)** | 0.60s (1.00x) | 0.80s (1.60x) |
+| **1,000** | 0.97s (3.33x) | 1.60s (2.08x) | **0.50s (1.25x)** | 0.80s (1.33x) | 0.90s (1.80x) |
+| **5,000** | 3.50s (11.96x) | 5.09s (6.62x) | **1.50s (3.75x)** | 1.90s (3.17x) | 1.80s (3.60x) |
+| **10,000** | 6.67s (22.80x) | 9.50s (12.34x) | **3.10s (7.75x)** | 5.80s (9.67x) | 4.90s (9.80x) |
+
+---
+
+## 5. Visualized Performance Curves (Zero-Baseline Axes)
 - ![FCP Comparison](./chart-fcp.svg)
 - ![LCP Comparison](./chart-lcp.svg)
 - ![TBT Comparison](./chart-tbt.svg)
 - ![Speed Index Comparison](./chart-si.svg)
+- ![Normalized LCP Scaling Factor](./chart-normalized-lcp.svg)

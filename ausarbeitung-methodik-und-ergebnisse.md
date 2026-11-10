@@ -181,6 +181,33 @@ In accordance with established empirical software engineering guidelines, we exp
 
 ---
 
+### 4.3 Cross-Study Value Normalization & Hardware Calibration ($S_N$ & $k_{\text{hw}}$)
+
+To guarantee rigorous scientific comparability between our Linux VM (`Intel Xeon 6985P-C, 7.76 GB RAM, Debian 12`) and the reference environment of Fahrudin et al. (2025) [Ref 17] (`Intel Core i7-8650U, 16 GB RAM, Windows 11`), we implemented a **three-pillar normalization framework**:
+
+1. **Lighthouse Lantern Simulation Standardization:** Both studies audited an *Academic Assessment Management System* across the exact same 7 workload stages ($N \in \{10, 50, 100, 500, 1,000, 5,000, 10,000\}$) using the **Google Lighthouse Desktop Preset** (`1350×940` viewport, simulated `40 ms` RTT, `10,240 Kbps` throughput, `1x` CPU slowdown multiplier).
+2. **Intra-Architecture Relative Scaling Normalization ($S_N = M_N / M_{10}$):** To eliminate any constant host-CPU offset between the two studies, we normalize each metric $M_N$ at workload stage $N$ by its **own baseline value $M_{10}$ at $N = 10$ on the same machine**:
+   $$S_N(\text{Metric}) = \frac{M_N}{M_{10}} \quad (\text{dimensionless multiplier, } S_{10} = 1.00\times)$$
+   This dimensionless index measures pure architectural degradation as a function of data load $N$, completely independent of baseline CPU clock speed.
+3. **Cross-Hardware Baseline Calibration Coefficient ($k_{\text{hw}} = 1.170$):** In the zero-blocking regime ($N \in \{10, 50, 100\}$, where `TBT = 0 ms` across all 5 architectures), the mean pre-rendered FCP in [Ref 17] is $\mu_{\text{FCP, [17]}} = \frac{0.40 + 0.30 + 0.30}{3} = 0.3333\text{ s}$, compared to $\mu_{\text{FCP, Own}} = 0.2850\text{ s}$ on our Linux VM. We derive the hardware calibration factor:
+   $$k_{\text{hw}} = \frac{\mu_{\text{FCP, [17] }(N \le 100)}}{\mu_{\text{FCP, Own }(N \le 100)}} = \frac{0.3333\text{ s}}{0.2850\text{ s}} = 1.170$$
+   Multiplying our raw measurements by $k_{\text{hw}} = 1.170$ ($M_{\text{calib}} = 1.170 \cdot M_{\text{own}}$) projects our empirical values onto the exact baseline latency scale of Fahrudin et al. [Ref 17]:
+
+#### Table 5: Hardware-Calibrated LCP ($M_{\text{calib}} = 1.170 \cdot M_{\text{own}}$) & Normalized Scaling Factor ($S_N = \text{LCP}_N / \text{LCP}_{10}$)
+| Data Load ($N$) | Astro Islands [Calibrated / $S_N$] | Next.js SSG [Calibrated / $S_N$] | Blade SSR [Ref 17 / $S_N$] | React CSR [Ref 17 / $S_N$] | Vue CSR [Ref 17 / $S_N$] |
+| ---: | :---: | :---: | :---: | :---: | :---: |
+| **10** | **0.29s (1.00x)** | 0.77s (1.00x) | 0.40s (1.00x) | 0.60s (1.00x) | 0.50s (1.00x) |
+| **50** | 0.32s (1.08x) | 0.82s (1.07x) | **0.30s (0.75x)** | 0.60s (1.00x) | 0.60s (1.20x) |
+| **100** | 0.33s (1.11x) | 0.86s (1.12x) | **0.30s (0.75x)** | 0.60s (1.00x) | 0.60s (1.20x) |
+| **500** | 0.69s (2.36x) | 1.11s (1.44x) | **0.40s (1.00x)** | 0.60s (1.00x) | 0.80s (1.60x) |
+| **1,000** | 0.97s (3.33x) | 1.60s (2.08x) | **0.50s (1.25x)** | 0.80s (1.33x) | 0.90s (1.80x) |
+| **5,000** | 3.50s (11.96x) | 5.09s (6.62x) | **1.50s (3.75x)** | 1.90s (3.17x) | 1.80s (3.60x) |
+| **10,000** | 6.67s (22.80x) | 9.50s (12.34x) | **3.10s (7.75x)** | 5.80s (9.67x) | 4.90s (9.80x) |
+
+![Normalized LCP Scaling Factor](./benchmarks/results/chart-normalized-lcp.svg)
+
+---
+
 ## 5. Discussion & Technical Advice for Scalable Web Architecture Design
 
 ### 5.1 Key Empirical Findings

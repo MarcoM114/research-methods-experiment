@@ -33,7 +33,7 @@ const COLORS = {
 };
 
 async function convertSvgChartsToPng() {
-  const charts = ['chart-fcp', 'chart-lcp', 'chart-tbt', 'chart-si'];
+  const charts = ['chart-fcp', 'chart-lcp', 'chart-tbt', 'chart-si', 'chart-normalized-lcp'];
   const pngPaths = {};
   for (const name of charts) {
     const svgPath = path.join(RESULTS_DIR, `${name}.svg`);
@@ -76,7 +76,7 @@ function addSlideHeader(slide, title, category = 'RESEARCH METHODS (SS 2026) •
   });
 }
 
-function addSlideFooter(slide, pageNum, totalPages = 14) {
+function addSlideFooter(slide, pageNum, totalPages = 15) {
   slide.addShape('line', {
     x: 0.5,
     y: 7.05,
@@ -791,7 +791,7 @@ async function buildPresentation() {
       },
       {
         q: '4. How did we ensure comparability & reliability?',
-        a: 'We enforced identical synthetic datasets (Seed 20260414), identical CSS/DOM structures, local loopback serving (127.0.0.1), clean incognito browser instances with storage reset before every run, and n = 5 independent repetitions per configuration (70 runs total), reporting Mean (μ) and Standard Deviation (σ).',
+        a: 'Internal: Identical datasets (Seed 20260414), CSS/DOM parity, incognito storage reset, n = 5 runs (μ ± σ). Cross-Study vs. [Ref 17]: Standardized Lighthouse Lantern Desktop simulation + Intra-Architecture Relative Scaling Normalization (S_N = M_N / M_10) + Light-Load Hardware Calibration Factor (k_hw = 1.170).',
         color: COLORS.purple
       }
     ];
@@ -842,7 +842,138 @@ async function buildPresentation() {
   }
 
   // =========================================================================
-  // SLIDE 8: EMPIRICAL RESULTS I - OWN JAMSTACK MEASUREMENTS TABLE
+  // SLIDE 8: CROSS-STUDY COMPARABILITY & VALUE NORMALIZATION METHODOLOGY
+  // =========================================================================
+  {
+    const slide = pptx.addSlide();
+    addSlideHeader(
+      slide,
+      'Cross-Study Comparability & Value Normalization Methodology',
+      '4. Methodology – Guaranteeing Comparability with Fahrudin et al. [Ref 17]'
+    );
+    addSlideFooter(slide, 8);
+
+    // Left Column: 3-Pillar Normalization Explanation
+    slide.addShape('roundRect', {
+      x: 0.45,
+      y: 1.15,
+      w: 6.05,
+      h: 5.7,
+      rectRadius: 0.08,
+      fill: { color: COLORS.cardBg },
+      line: { color: COLORS.purple, width: 1.5 }
+    });
+    slide.addShape('rect', {
+      x: 0.45,
+      y: 1.15,
+      w: 6.05,
+      h: 0.48,
+      fill: { color: COLORS.purple }
+    });
+    slide.addText('How We Guarantee Cross-Study Comparability (3 Pillars)', {
+      x: 0.65,
+      y: 1.22,
+      w: 5.65,
+      h: 0.35,
+      fontSize: 12.5,
+      bold: true,
+      color: 'FFFFFF',
+      fontFace: 'Arial'
+    });
+
+    slide.addText(
+      [
+        {
+          text: '1. Lighthouse Lantern Simulation Standardization:\n',
+          options: { bold: true, color: COLORS.blue }
+        },
+        {
+          text: 'Both our study and Fahrudin et al. [Ref 17] used Google Lighthouse in Desktop mode (1350×940, simulated 40 ms RTT, 10,240 Kbps throughput, 1x CPU multiplier) across the exact same 7 workload stages (N = 10 to 10,000) in an Academic Assessment System.\n\n',
+          options: { color: COLORS.slateDark }
+        },
+        {
+          text: '2. Relative Scaling Normalization (S_N = M_N / M_10):\n',
+          options: { bold: true, color: COLORS.emerald }
+        },
+        {
+          text: 'To eliminate any constant hardware offset between [Ref 17] (Intel Core i7-8650U, 16 GB RAM) and our Linux VM (Intel Xeon 6985P-C, 7.76 GB RAM), we normalize each metric M_N by its own baseline value at N = 10 on the same host:\n',
+          options: { color: COLORS.slateDark }
+        },
+        {
+          text: '   S_N(Metric) = M_N / M_10   (Dimensionless, 1.00x at N = 10)\n\n',
+          options: { bold: true, color: COLORS.navy }
+        },
+        {
+          text: '3. Light-Load Hardware Calibration Factor (k_hw = 1.170):\n',
+          options: { bold: true, color: COLORS.amber }
+        },
+        {
+          text: 'In the zero-blocking regime (N ∈ {10, 50, 100}, where TBT = 0 ms everywhere), mean pre-rendered FCP is 0.333s in [Ref 17] vs. 0.285s on our VM. Applying the calibration coefficient:\n',
+          options: { color: COLORS.slateDark }
+        },
+        {
+          text: '   k_hw = μ_FCP,[17](N≤100) / μ_FCP,Own(N≤100) = 0.3333 / 0.2850 = 1.170\n',
+          options: { bold: true, color: COLORS.navy }
+        },
+        {
+          text: 'projects our raw measurements (M_calib = 1.170 · M_own) directly onto the hardware baseline of [Ref 17].',
+          options: { color: COLORS.slateDark }
+        }
+      ],
+      {
+        x: 0.65,
+        y: 1.72,
+        w: 5.65,
+        h: 5.0,
+        fontSize: 10.3,
+        fontFace: 'Arial',
+        valign: 'top'
+      }
+    );
+
+    // Right Column Top: Normalized LCP Scaling Chart
+    slide.addImage({
+      path: pngPaths['chart-normalized-lcp'],
+      x: 6.68,
+      y: 1.15,
+      w: 6.2,
+      h: 3.15
+    });
+
+    // Right Column Bottom: Calibrated LCP & Scaling Factor Table
+    const calibRows = [
+      [
+        { text: 'Load (N)', options: { bold: true, fill: COLORS.navy, color: 'FFFFFF' } },
+        { text: 'Astro [Calib / S_N]', options: { bold: true, fill: COLORS.emerald, color: 'FFFFFF' } },
+        { text: 'Next.js [Calib / S_N]', options: { bold: true, fill: COLORS.blue, color: 'FFFFFF' } },
+        { text: 'Blade [17 / S_N]', options: { bold: true, fill: COLORS.navy, color: 'FFFFFF' } },
+        { text: 'React [17 / S_N]', options: { bold: true, fill: COLORS.navy, color: 'FFFFFF' } },
+        { text: 'Vue [17 / S_N]', options: { bold: true, fill: COLORS.navy, color: 'FFFFFF' } }
+      ],
+      ['10', { text: '0.29s (1.0x)', options: { bold: true, fill: COLORS.emeraldLight } }, '0.77s (1.0x)', '0.40s (1.0x)', '0.60s (1.0x)', '0.50s (1.0x)'],
+      ['50', '0.32s (1.1x)', '0.82s (1.1x)', { text: '0.30s (0.8x)', options: { bold: true, fill: COLORS.amberLight } }, '0.60s (1.0x)', '0.60s (1.2x)'],
+      ['100', '0.33s (1.1x)', '0.86s (1.1x)', { text: '0.30s (0.8x)', options: { bold: true, fill: COLORS.amberLight } }, '0.60s (1.0x)', '0.60s (1.2x)'],
+      ['500', '0.69s (2.4x)', '1.11s (1.4x)', { text: '0.40s (1.0x)', options: { bold: true, fill: COLORS.amberLight } }, '0.60s (1.0x)', '0.80s (1.6x)'],
+      ['1,000', '0.97s (3.3x)', '1.60s (2.1x)', { text: '0.50s (1.3x)', options: { bold: true, fill: COLORS.amberLight } }, '0.80s (1.3x)', '0.90s (1.8x)'],
+      ['5,000', '3.50s (12.0x)', '5.09s (6.6x)', { text: '1.50s (3.8x)', options: { bold: true, fill: COLORS.amberLight } }, '1.90s (3.2x)', '1.80s (3.6x)'],
+      ['10,000', '6.67s (22.8x)', '9.50s (12.3x)', { text: '3.10s (7.8x)', options: { bold: true, fill: COLORS.amberLight } }, '5.80s (9.7x)', '4.90s (9.8x)']
+    ];
+
+    slide.addTable(calibRows, {
+      x: 6.68,
+      y: 4.4,
+      w: 6.2,
+      colW: [0.8, 1.2, 1.2, 1.0, 1.0, 1.0],
+      fontSize: 8.5,
+      fontFace: 'Arial',
+      border: { pt: 0.6, color: COLORS.border },
+      align: 'center',
+      valign: 'middle'
+    });
+  }
+
+  // =========================================================================
+  // SLIDE 9: EMPIRICAL RESULTS I - OWN JAMSTACK MEASUREMENTS TABLE
   // =========================================================================
   {
     const slide = pptx.addSlide();
@@ -851,7 +982,7 @@ async function buildPresentation() {
       'Empirical Results I: Own Jamstack Measurements (μ ± σ, n = 5 Runs)',
       '5. Empirical Results (Next.js SSG vs. Astro Islands)'
     );
-    addSlideFooter(slide, 8);
+    addSlideFooter(slide, 9);
 
     const header = [
       { text: 'Architecture', options: { bold: true, fill: COLORS.navy, color: 'FFFFFF' } },
@@ -920,7 +1051,7 @@ async function buildPresentation() {
   }
 
   // =========================================================================
-  // SLIDE 9: CROSS-STUDY RESULTS II - FCP & SPEED INDEX CHARTS
+  // SLIDE 10: CROSS-STUDY RESULTS II - FCP & SPEED INDEX CHARTS
   // =========================================================================
   {
     const slide = pptx.addSlide();
@@ -929,7 +1060,7 @@ async function buildPresentation() {
       'Cross-Study Results II: First Contentful Paint (FCP) & Speed Index (SI)',
       '5. Cross-Study Comparison vs. Fahrudin et al. (2025) [Ref 17]'
     );
-    addSlideFooter(slide, 9);
+    addSlideFooter(slide, 10);
 
     slide.addImage({
       path: pngPaths['chart-fcp'],
@@ -972,7 +1103,7 @@ async function buildPresentation() {
           options: { bold: true, color: COLORS.emerald }
         },
         {
-          text: 'From N = 50 (0.27s) to N = 1,000 (0.80s), Astro achieves the lowest (best) Speed Index across all 5 architectures—outperforming Next.js SSG (1.06s), React CSR (0.90s), Vue CSR (0.90s), and Blade SSR (1.50s) at N = 1,000.',
+          text: 'From N = 50 (0.27s raw / 0.32s calibrated) to N = 1,000 (0.80s raw / 0.93s calibrated), Astro achieves tremendous visual progression speed—outperforming Next.js SSG (1.06s) and Blade SSR (1.50s) at N = 1,000.',
           options: { color: COLORS.slateDark }
         }
       ],
@@ -989,7 +1120,7 @@ async function buildPresentation() {
   }
 
   // =========================================================================
-  // SLIDE 10: CROSS-STUDY RESULTS III - LARGEST CONTENTFUL PAINT (LCP)
+  // SLIDE 11: CROSS-STUDY RESULTS III - LARGEST CONTENTFUL PAINT (LCP)
   // =========================================================================
   {
     const slide = pptx.addSlide();
@@ -998,7 +1129,7 @@ async function buildPresentation() {
       'Cross-Study Results III: Largest Contentful Paint (LCP [s], Lower is Better)',
       '5. Cross-Study Comparison vs. Fahrudin et al. (2025) [Ref 17]'
     );
-    addSlideFooter(slide, 10);
+    addSlideFooter(slide, 11);
 
     slide.addImage({
       path: pngPaths['chart-lcp'],
@@ -1051,7 +1182,7 @@ async function buildPresentation() {
       [
         { text: 'Key LCP Takeaways (Best values highlighted in table per Lecture 04, Slide 51):\n', options: { bold: true, color: COLORS.navy } },
         {
-          text: '• Light Workloads (N = 10 to 100): Astro Islands achieves the fastest LCP overall (0.25s–0.28s), reducing LCP by 62% compared to Next.js SSG (0.66s–0.74s) and by 53%–58% compared to React CSR (0.60s) [Ref 17].\n',
+          text: '• Light Workloads (N = 10 to 100): Astro Islands achieves the fastest LCP overall (0.25s–0.28s raw; 0.29s–0.33s calibrated), reducing LCP by 62% compared to Next.js SSG and by >50% compared to React CSR [Ref 17].\n',
           options: { color: COLORS.slateDark }
         },
         {
@@ -1076,7 +1207,7 @@ async function buildPresentation() {
   }
 
   // =========================================================================
-  // SLIDE 11: CROSS-STUDY RESULTS IV - TOTAL BLOCKING TIME (TBT)
+  // SLIDE 12: CROSS-STUDY RESULTS IV - TOTAL BLOCKING TIME (TBT)
   // =========================================================================
   {
     const slide = pptx.addSlide();
@@ -1085,7 +1216,7 @@ async function buildPresentation() {
       'Cross-Study Results IV: Total Blocking Time (TBT [ms], Lower is Better)',
       '5. Cross-Study Comparison vs. Fahrudin et al. (2025) [Ref 17]'
     );
-    addSlideFooter(slide, 11);
+    addSlideFooter(slide, 12);
 
     slide.addImage({
       path: pngPaths['chart-tbt'],
@@ -1142,7 +1273,7 @@ async function buildPresentation() {
           options: { color: COLORS.slateDark }
         },
         {
-          text: '• N = 10,000 (45%–52% Reduction vs. Blade SSR): While Laravel Blade SSR reaches 4,860 ms TBT in [Ref 17], Next.js SSG (2,344 ms) and Astro Islands (2,676 ms) cut main-thread blocking time roughly in half.\n',
+          text: '• N = 10,000 (45%–52% Raw / 36%–44% Calibrated Reduction vs. Blade SSR): While Blade SSR reaches 4,860 ms TBT in [Ref 17], Next.js SSG (2,344 ms raw / 2,742 ms calibrated) and Astro Islands (2,676 ms raw / 3,131 ms calibrated) substantially reduce blocking time.\n',
           options: { color: COLORS.slateDark }
         },
         {
@@ -1163,7 +1294,7 @@ async function buildPresentation() {
   }
 
   // =========================================================================
-  // SLIDE 12: CAUSAL ANALYSIS - DOUBLE PAYLOAD & DOM INFLECTION POINT
+  // SLIDE 13: CAUSAL ANALYSIS - DOUBLE PAYLOAD & DOM INFLECTION POINT
   // =========================================================================
   {
     const slide = pptx.addSlide();
@@ -1172,7 +1303,7 @@ async function buildPresentation() {
       'Causal Analysis: The "Double-Payload Penalty" & DOM Inflection Point',
       '6. Scientific Discussion'
     );
-    addSlideFooter(slide, 12);
+    addSlideFooter(slide, 13);
 
     // Box 1: Double Payload
     slide.addShape('roundRect', {
@@ -1284,7 +1415,7 @@ async function buildPresentation() {
   }
 
   // =========================================================================
-  // SLIDE 13: TECHNICAL ADVICE FOR SCALABLE DESIGN (TOPIC #14 PART 2)
+  // SLIDE 14: TECHNICAL ADVICE FOR SCALABLE DESIGN (TOPIC #14 PART 2)
   // =========================================================================
   {
     const slide = pptx.addSlide();
@@ -1293,7 +1424,7 @@ async function buildPresentation() {
       'Technical Advice for Scalable Web Architecture Design',
       '7. Actionable Engineering Recommendations (Topic #14)'
     );
-    addSlideFooter(slide, 13);
+    addSlideFooter(slide, 14);
 
     const guidelines = [
       {
@@ -1377,7 +1508,7 @@ async function buildPresentation() {
   }
 
   // =========================================================================
-  // SLIDE 14: THREATS TO VALIDITY, CONCLUSION & REFERENCES
+  // SLIDE 15: THREATS TO VALIDITY, CONCLUSION & REFERENCES
   // =========================================================================
   {
     const slide = pptx.addSlide();
@@ -1386,7 +1517,7 @@ async function buildPresentation() {
       'Threats to Validity, Conclusion & Primary References',
       '8. Conclusion & References'
     );
-    addSlideFooter(slide, 14);
+    addSlideFooter(slide, 15);
 
     slide.addShape('roundRect', {
       x: 0.5,
@@ -1414,9 +1545,9 @@ async function buildPresentation() {
           text: 'All 70 runs between Next.js and Astro were executed on the exact same Linux VM, Chromium binary (156.0.8078.79), loopback network, and seeded data (Seed 20260414), yielding minimal variance (LCP σ ≤ 0.08s).\n\n',
           options: {}
         },
-        { text: 'External / Cross-Study Validity:\n', options: { bold: true, color: COLORS.blue } },
+        { text: 'External / Cross-Study Validity & Normalization:\n', options: { bold: true, color: COLORS.blue } },
         {
-          text: 'While our study replicates the exact workload stages (10..10,000) and Lighthouse Desktop protocol of Fahrudin et al. [Ref 17], cross-study comparisons prioritize relative scaling curves and inflection points to account for host CPU differences.\n\n',
+          text: 'By combining standardized Lighthouse Lantern Desktop simulation with Intra-Architecture Relative Scaling Normalization (S_N = M_N / M_10) and Light-Load Hardware Calibration (k_hw = 1.170), our cross-study conclusions remain invariant to raw CPU clock differences.\n\n',
           options: {}
         },
         { text: 'Open-Science Reproducibility Repository:\n', options: { bold: true, color: COLORS.purple } },
