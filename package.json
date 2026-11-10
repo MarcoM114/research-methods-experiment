@@ -1,0 +1,22 @@
+{
+  "name": "research-methods-experiment",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Empirical Performance Benchmark: Jamstack (Next.js SSG & Astro Islands) vs. SPA/SSR (Fahrudin et al., 2025 [Ref 17]) across 10 to 10,000 dataset entries using Google Lighthouse.",
+  "type": "module",
+  "scripts": {
+    "generate:data": "node data/generate-data.mjs",
+    "build:nextjs": "npm --prefix apps/jamstack-nextjs run build",
+    "build:astro": "npm --prefix apps/jamstack-astro run build",
+    "build": "npm run generate:data && npm run build:nextjs && npm run build:astro",
+    "benchmark": "node benchmarks/run-lighthouse.mjs",
+    "benchmark:quick": "node benchmarks/run-lighthouse.mjs --runs 2",
+    "analyze": "node benchmarks/analyze-results.mjs",
+    "setup": "npm install && npm --prefix apps/jamstack-nextjs install && npm --prefix apps/jamstack-astro install && npm run build"
+  },
+  "devDependencies": {
+    "lighthouse": "^12.4.0",
+    "chrome-launcher": "^1.1.2",
+    "serve": "^14.2.4"
+  }
+}

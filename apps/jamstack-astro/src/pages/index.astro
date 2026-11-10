@@ -1,0 +1,36 @@
+---
+import '../../../../shared/styles.css';
+
+const STAGES = [10, 50, 100, 500, 1000, 5000, 10000];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Academic Assessment Dashboard — Astro Jamstack (Islands)</title>
+    <meta
+      name="description"
+      content="Empirical Benchmark Prototype for Web Application Architecture Performance Evaluation (Astro Jamstack SSG + Islands Architecture)"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header-bar">
+        <div class="header-title">
+          <h1>Academic Assessment Management System</h1>
+          <p>Benchmark Prototype – Astro (Jamstack Static Site Generation + Islands Architecture)</p>
+        </div>
+        <span class="arch-badge">Architecture: Astro Jamstack (Islands)</span>
+      </header>
+      <nav class="stage-nav" aria-label="Dataset Stages">
+        <span>Select Data Load (N):</span>
+        {STAGES.map((stage) => (
+          <a href={`/assessments/${stage}`} class="stage-link">
+            {stage.toLocaleString('en-US')} Entries
+          </a>
+        ))}
+      </nav>
+    </main>
+  </body>
+</html>

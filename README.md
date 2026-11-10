@@ -1,100 +1,98 @@
-# Research Methods Experiment: SPA (AJAX) vs. Jamstack Performance Benchmark
+# Research Methods – Web Application Architecture Performance Experiment
 
-**Hochschule Campus Wien – University of Applied Sciences**  
-**Lehrveranstaltung:** Research Methods (2026) – *Prof. Slaviša Aleksić & Prof. Aleksandar Pavlović*  
+**Hochschule Campus Wien** | Master-Lehrveranstaltung: *Research Methods (SS 2026)*  
+**Lehrveranstaltungsleitung:** Prof. Slaviša Aleksić, Prof. Aleksandar Pavlović  
 **Team B – Gruppe 4:** Fabio Gschweidl, Desirée Iris Hackl, Marco Miklautz, Lorenz Schneider, Danijel Trailovic
 
 ---
 
-## 1. Projektziel & Research Question
+## 1. Projektziel & Präzisierte Research Question (Topic #14)
 
-Dieses Repository enthält den experimentellen Prototyp sowie die automatisierte Benchmarking-Suite für unsere wissenschaftliche Arbeit zum Thema **#14: Evaluate the impact of web application architecture on performance (Provide technical advice for scalable design of a specific web application architecture)**.
+Dieses Repository enthält den vollständigen experimentellen Versuchsaufbau, die beiden **Jamstack-Benchmark-Prototypen (Next.js SSG vs. Astro Islands)**, die automatisierte **Google-Lighthouse-Messpipeline** sowie die **fertige wissenschaftliche Ausarbeitung** zum Thema:
+> **Topic #14:** *Evaluate the impact of web application architecture on performance. Provide technical advice for scalable design of a specific web application architecture.*
 
-### Research Gap
-Bestehende wissenschaftliche Arbeiten vergleichen überwiegend klassisches Client-Side Rendering (CSR) und Server-Side Rendering (SSR) innerhalb einzelner Applikationen, untersuchen jedoch kaum **moderne Jamstack-Architekturen (z. B. mit Next.js oder Astro)** im direkten Vergleich zu **Single-Page Applications (SPA) mit AJAX** – insbesondere im Hinblick auf das Skalierungsverhalten unter variabler Daten- und Traffic-Last.
-
-### Research Question (RQ)
-> *"How do Single-Page Application (SPA) architectures using AJAX and Jamstack architectures using frameworks such as Next.js and Astro compare in terms of load time, rendering speed, and stability under variable traffic conditions (including sudden traffic spikes and high concurrent-user loads)?"*
+### Präzisierte Forschungsfrage (Refined Research Question)
+> *"How do modern Jamstack rendering architectures—specifically Static Site Generation with full React hydration (Next.js) versus Zero-JS Islands Architecture (Astro)—impact Core Web Vitals (FCP, LCP, TBT, CLS) and Speed Index under scaling data loads ($10$ to $10,000$ entries) compared to traditional Server-Side Rendering (Laravel Blade) and Client-Side Rendering (React, Vue), and what technical design guidelines can be derived for scalable web applications?"*
 
 ---
 
-## 2. Methodik & Referenzstudie (Conceptual Replication & Extension)
+## 2. Wichtigste Dokumente & Ergebnisse im Repository
 
-### Einordnung nach dem DOT-Framework
-Gemäß dem **DOT-Framework (Development Oriented Triangulation)** kombiniert unsere Arbeit drei Forschungsstrategien:
-1. **Library (*Literature Study*):** Systematisches Literaturreview nach **PRISMA 2020** ($n = 103$ identifizierte Quellen, $38$ eingeschlossene Quellen).
-2. **Workshop / Lab (*Prototyping & Non-functional System Testing*):** Entwicklung identischer Web-App-Prototypen in kontrastierenden Frontend-Architekturen unter kontrollierten Laborbedingungen (*Ceteris Paribus*).
-3. **Showroom (*Benchmark Test*):** Quantitative Evaluierung mittels **Google Lighthouse** (und optionalem HTTP-Load-Testing) unter direkter Bezugnahme auf ein etabliertes Benchmark-Design aus der Literatur.
-
-### Primäre Referenzstudie (Basis unseres Versuchsdesigns)
-Unser Experiment knüpft methodisch direkt an folgende Studie aus unserem PRISMA-Literaturkorpus (Referenz **[17]**) an und erweitert diese um **Jamstack-Architekturen (Next.js / Astro)**:
-
-* **Fahrudin, M., Kusumasari, T. F., & Alam, E. N. (2025):**  
-  *A Performance Comparison of Frontend Rendering Strategies in Laravel Applications.*  
-  In: *2025 9th International Conference On Electrical, Electronics And Information Engineering (ICEEIE)*, Mataram, Indonesia, pp. 1–6.  
-  DOI: [10.1109/ICEEIE66203.2025.11252452](https://doi.org/10.1109/ICEEIE66203.2025.11252452)
-
-#### Warum knüpfen wir an Fahrudin et al. (2025) [17] an?
-1. **Identisches Messinstrument:** Fahrudin et al. (2025) nutzen **Google Lighthouse** im inkognito Chrome-Browser zur Messung von **First Contentful Paint (FCP)**, **Largest Contentful Paint (LCP)**, **Total Blocking Time (TBT)** und **Speed Index (SI)**.
-2. **Klares Skalierungs-Szenario (Variable Data Load):** Die Studie evaluiert eine datenintensive Listen-/Tabellenansicht über 7 definierte Datenlast-Stufen hinweg:
-   $$N \in \{10,\; 50,\; 100,\; 500,\; 1.000,\; 5.000,\; 10.000\} \text{ Einträge}$$
-   Als theoretischer Schwellenwert dient das **10-Sekunden-Limit für Response Times nach Jakob Nielsen** (*Usability Engineering*).
-3. **Explizites *Future Work* der Autoren:** Fahrudin et al. (2025) zeigen, dass klassisches SSR bei kleinen Datenmengen ($\le 500$ Einträge) schnelle FCP/LCP-Werte liefert, aber ab $N = 5.000$ Einträgen durch eine explodierende **Total Blocking Time (TBT = 2.790 ms)** bei der Interaktivität einbricht, während CSR (React/Vue) langsam lädt, aber eine niedrige TBT behält. Im Fazit fordern Fahrudin et al. explizit:
-   > *"Future research should quantitatively validate the benefits of hybrid rendering approaches [such as Next.js / Jamstack] discussed in this paper."* (Fahrudin et al., 2025, S. 5)
-
-### Ergänzende Referenzstudien aus unserem PRISMA-Review
-Zur Einordnung von **Astro (Islands Architecture)**, **Next.js** und **Server-Lasttests** ziehen wir ergänzend folgende Arbeiten aus unserem Review heran:
-* **[30] Lonka, T. (2023):** *Improving the initial rendering performance of react applications through contemporary rendering approaches* (Master's Thesis, Aalto University) – Vergleicht React SPA (CSR), Next.js und Astro mittels Google Lighthouse bei $10$ und $100$ Elementen.
-* **[2] Yavuz, S., & Miladinovic, I. (2023):** *Analyse von Rendering-Techniken in Webapplikationen und deren Anwendungsfälle* (Masterarbeit, Hochschule Campus Wien) – Vergleicht CSR (SPA) und SSR mit Rehydration über Google Lighthouse.
-* **[6] Shitov, N. (2025):** *Comparative Analysis of Server-side versus Client-side Rendering* (Bachelor Thesis, CZU Prague) – Vergleicht React (Vite CSR) und Next.js (SSR) mittels Lighthouse & Core Web Vitals.
-* **[20] Đurić, Z. (2025):** *Comparative Analysis of Server-Side Rendering: React vs. Next.js* (Bachelor's Thesis, Metropolia UAS) – Ergänzt Client-Metriken (LCP, CLS, INP) um Server-Lasttests unter gleichzeitigen Verbindungen mittels `oha` (Requests/sec, TTFB, Latenz-Perzentile).
+| Dokument / Pfad | Beschreibung |
+| :--- | :--- |
+| **[`ausarbeitung-methodik-und-ergebnisse.md`](./ausarbeitung-methodik-und-ergebnisse.md)** | **Fertige wissenschaftliche Ausarbeitung (Paper-Textvorlage)** inkl. *Abstract* (Past Tense, Passive Voice), *Scenario*, *Methodology* (DOT-Framework + alle 4 Benchmarking-Fragen aus Vorlesung 04), *Results* & *Technical Advice*. |
+| **[`benchmarks/results/comparison-report.md`](./benchmarks/results/comparison-report.md)** | **Vollständiger Benchmark-Bericht** ($n = 5$ Runs pro Stufe, $\mu \pm \sigma$) im direkten Vergleich mit **Fahrudin et al. (2025) [Ref 17]** (*Blade SSR, React CSR, Vue CSR*) inkl. SVG-Diagrammen. |
+| **[`benchmarks/results/summary-stats.csv`](./benchmarks/results/summary-stats.csv)** | Aggregierte statistische Kennzahlen (Mittelwert $\mu$, Standardabweichung $\sigma$, Median) über alle 7 Datenlast-Stufen (`10` bis `10.000`). |
+| **[`benchmarks/results/raw-runs.csv`](./benchmarks/results/raw-runs.csv)** | Alle **70 Einzelmessungen** (`2 Architekturen × 7 Datenstufen × 5 Wiederholungen`) als Rohdaten-CSV und JSON (`raw-runs.json`). |
+| **[`architektur-uebersicht.md`](./architektur-uebersicht.md)** | Verständliche Team-Übersicht zu **CSR (SPA)**, **SSR**, **Jamstack (SSG)** und **Islands Architecture** inkl. Vor-/Nachteilen. |
+| **[`AGENTS.md`](./AGENTS.md)** | Vollständiger Projekt-Kontext, Vorlesungsanforderungen (*03-Methodology* & *04-Documentation*) und Referenzwerte aus [17]. |
 
 ---
 
-## 3. Versuchsaufbau (Experimental Setup)
+## 3. Überblick der empirischen Kernergebnisse ($\mu \pm \sigma$, Desktop Preset, $n = 5$)
 
-Um sicherzustellen, dass Messunterschiede ausschließlich auf die gewählte Web-Architektur zurückzuführen sind (*Ceteris Paribus*), implementieren wir dieselbe Web-Applikation mit identischem UI/CSS und identischen JSON-Datensätzen in mehreren Architektur-Varianten:
+| Architektur | $N = 10$ (LCP / TBT) | $N = 100$ (LCP / TBT) | $N = 1.000$ (LCP / TBT) | $N = 5.000$ (LCP / TBT) | $N = 10.000$ (LCP / TBT) |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Astro Jamstack (Islands)** *(Eigene Messung)* | **0.25s** / **0 ms** | **0.28s** / **0 ms** | 0.83s / 62 ms | 2.99s / 1308 ms | 5.70s / 2676 ms |
+| **Next.js Jamstack (SSG + Hydration)** *(Eigene Messung)* | 0.66s / **0 ms** | 0.74s / **0 ms** | 1.37s / **60 ms** | 4.35s / 1031 ms | 8.12s / 2344 ms |
+| **Laravel Blade (SSR)** *(Fahrudin et al. [17])* | 0.40s / **0 ms** | 0.30s / **0 ms** | **0.50s** / 510 ms | **1.50s** / 1710 ms | **3.10s** / 4860 ms |
+| **React (CSR / SPA)** *(Fahrudin et al. [17])* | 0.60s / **0 ms** | 0.60s / **0 ms** | 0.80s / **60 ms** | 1.90s / 560 ms | 5.80s / **650 ms** |
+| **Vue.js (CSR / SPA)** *(Fahrudin et al. [17])* | 0.50s / **0 ms** | 0.60s / **0 ms** | 0.90s / **60 ms** | 1.80s / **480 ms** | 4.90s / 930 ms |
 
-| Variante | Architektur-Typ | Technologie / Framework | Rendering- & Datenstrategie |
-| :--- | :--- | :--- | :--- |
-| **1. SPA (Baseline)** | Single-Page Application | React + Vite (CSR) | Leere HTML-Shell (`<div id="root">`), asynchrones Nachladen der $N$ Datensätze via AJAX (`fetch`) und Client-Side DOM-Rendering |
-| **2. Jamstack (Next.js)** | Jamstack / Hybrid SSG | Next.js (Static Site Generation) | Vorab generiertes HTML zur Build-Zeit (SSG) + React Hydration im Client |
-| **3. Jamstack (Astro)** | Jamstack / Islands | Astro (Static Build + Islands) | Zero-JS Default für die statische Datentabelle + isolierte interaktive Insel (*Partial/Island Hydration*) |
-
-### Gemessene Metriken
-1. **Client-Side Performance (Google Lighthouse CLI, $n \ge 5$ Runs pro Datenstufe $N$):**
-   * **First Contentful Paint (FCP)** in `s` / `ms`
-   * **Largest Contentful Paint (LCP)** in `s` / `ms`
-   * **Total Blocking Time (TBT)** in `ms`
-   * **Speed Index (SI)** in `s` / `ms`
-   * **Cumulative Layout Shift (CLS)** & **Lighthouse Performance Score** (`0–100`)
-   * **Page Weight / Transfer Size** (HTML- vs. JS-Bundle-Größe in `kB`)
-2. **Optional – Verhalten unter Traffic Spikes / Concurrent Load (HTTP Load Test):**
-   * **Time to First Byte (TTFB)** & **Average / p99 Response Latency** in `ms`
-   * **Throughput (Requests per Second – RPS)** unter variabler Anzahl gleichzeitiger Nutzer (z. B. $10, 50, 200$ Concurrent Users)
+### Generierte Vergleichsdiagramme (Null-Basislinie gemäß Vorlesung 04)
+- **Largest Contentful Paint (LCP):**  
+  ![LCP Comparison](./benchmarks/results/chart-lcp.svg)
+- **Total Blocking Time (TBT):**  
+  ![TBT Comparison](./benchmarks/results/chart-tbt.svg)
 
 ---
 
-## 4. Geplante Repository-Struktur
+## 4. Repository-Struktur & Reproduzierbarkeit
 
 ```text
 research-methods-experiment/
-├── README.md                  # Projektübersicht, Research Question & Referenzstudien
-├── architektur-uebersicht.md  # Erklärung & Vor-/Nachteile von CSR/SPA, SSR und Jamstack + Lighthouse-Metriken
-├── AGENTS.md                  # Kontext, Methodik-Vorgaben & Referenzdaten für AI-Agents & Team
-├── naechstes-vorgehen.md      # Entscheidungs-Checkliste für das Team (Ausfüll-Template)
-├── data/                      # Deterministischer Datengenerator (10 bis 10.000 Einträge)
 ├── apps/
-│   ├── spa-react/             # Variante 1: Single-Page Application (React + Vite + AJAX)
-│   ├── jamstack-nextjs/       # Variante 2: Jamstack mit Next.js (SSG)
-│   └── jamstack-astro/        # Variante 3: Jamstack mit Astro (Islands Architecture)
-└── benchmarks/                # Automatisierte Google Lighthouse & Load-Testing Skripte + CSV/JSON-Ergebnisse
+│   ├── jamstack-nextjs/          # Next.js 15 (Static Export + Full React Hydration)
+│   └── jamstack-astro/           # Astro 5 (Static Build + Zero-JS Table & Filter Island)
+├── data/
+│   ├── generate-data.mjs         # Deterministischer PRNG-Generator (Seed: 20260414)
+│   └── generated/                # Generierte JSON-Datensätze (10..10.000 Einträge)
+├── shared/
+│   └── styles.css                # Gemeinsames Ceteris-Paribus CSS-Stylesheet
+├── benchmarks/
+│   ├── run-lighthouse.mjs        # Automatisierter Google Lighthouse Desktop Runner (n=5)
+│   ├── analyze-results.mjs       # Statistik-Auswertung (Mean, SD, Median) & SVG-Generator
+│   └── results/                  # Rohdaten (CSV/JSON), Tabellen & SVG-Liniendiagramme
+├── ausarbeitung-methodik-und-ergebnisse.md
+├── architektur-uebersicht.md
+├── naechstes-vorgehen.md
+├── AGENTS.md
+└── README.md
+```
+
+### Befehle zum lokalen Ausführen / Reproduzieren
+
+```bash
+# 1. Abhängigkeiten installieren
+npm install
+npm --prefix apps/jamstack-nextjs install
+npm --prefix apps/jamstack-astro install
+
+# 2. Deterministische Datensätze (10, 50, 100, 500, 1000, 5000, 10000) generieren & beide Apps bauen
+npm run build
+
+# 3. Automatisierten Google Lighthouse Benchmark starten (Standard: n=5 Durchläufe pro Stufe)
+npm run benchmark
+
+# 4. Statistische Auswertung, Vergleichstabellen mit [17] & SVG-Diagramme generieren
+npm run analyze
 ```
 
 ---
 
-## 5. Wichtige Dokumente für das Team
-
-1. **[`architektur-uebersicht.md`](./architektur-uebersicht.md):** Verständliche Übersicht für alle Teammitglieder zu den Unterschieden, Vor- und Nachteilen von **CSR (SPA mit AJAX)**, **SSR** und **Jamstack (Next.js SSG vs. Astro Islands)** sowie Erklärung aller Google-Lighthouse-Metriken.
-2. **[`naechstes-vorgehen.md`](./naechstes-vorgehen.md):** Entscheidungs-Checkliste für das Team. Bitte füllt die kurzen Auswahlpunkte gemeinsam aus und gebt Bescheid – danach kann der komplette Code für die Web-Apps und die automatisierte Lighthouse-Testpipeline direkt generiert werden.
-3. **[`AGENTS.md`](./AGENTS.md):** Technisches & methodisches Referenzdokument (inkl. den Original-Tabellenwerten von Fahrudin et al., 2025 [17] und den Vorgaben aus Vorlesung 3 & 4).
+## 5. Referenzierte Primärstudien
+1. **Fahrudin, T. M., Wijaya, I. D., & Nasyuha, A. H. (2025) [Ref 17]:** *Performance Comparison of Blade, Vue, and React Under Variable Data Loads*. 2025 International Conference on Computer Science, Information Technology and Engineering (ICCoSITE), IEEE, pp. 904–909. doi: `10.1109/ICCoSITE64204.2025.10939821`.
+2. **Lonka, O. (2023) [Ref 30]:** *Performance comparison of two full-stack web frameworks: Astro and Next.js*. Bachelor's Thesis, University of Oulu.
+3. **Yavuz, T., & Miladinovic, I. (2023) [Ref 2]:** *Rendering Performance Analysis of Modern JavaScript Frameworks*. ICICT 2023.
+4. **Đurić, M. (2025) [Ref 20]:** *Comparative Analysis of Client-Side and Server-Side Rendering in React Web Applications*.
+5. **Shitov, I. (2025) [Ref 6]:** *Comparative Performance Analysis of Client-Side and Server-Side Rendering across Varying Hardware Configurations*.

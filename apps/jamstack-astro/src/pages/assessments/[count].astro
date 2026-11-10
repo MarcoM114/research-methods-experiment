@@ -1,0 +1,247 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import '../../../../../shared/styles.css';
+
+export function getStaticPaths() {
+  const STAGES = [10, 50, 100, 500, 1000, 5000, 10000];
+  return STAGES.map((count) => ({
+    params: { count: String(count) }
+  }));
+}
+
+const STAGES = [10, 50, 100, 500, 1000, 5000, 10000];
+const count = Number(Astro.params.count);
+
+const filePath = path.resolve(process.cwd(), `../../data/generated/assessments-${count}.json`);
+const items = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+
+const total = items.length;
+const sumScore = items.reduce((acc, it) => acc + it.score, 0);
+const distinctionCount = items.filter((it) => it.status === 'Distinction').length;
+const retakeCount = items.filter((it) => it.status === 'Retake Required').length;
+const passedCount = total - retakeCount;
+
+const stats = {
+  avgScore: (sumScore / total).toFixed(1),
+  passRate: ((passedCount / total) * 100).toFixed(1),
+  distinctionCount,
+  retakeCount
+};
+
+function getStatusBadgeClass(status) {
+  if (status === 'Distinction') return 'badge badge-distinction';
+  if (status === 'Passed') return 'badge badge-passed';
+  return 'badge badge-retake';
+}
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Academic Assessment Dashboard — Astro Jamstack ({count.toLocaleString('en-US')} Entries)</title>
+    <meta
+      name="description"
+      content="Empirical Benchmark Prototype for Web Application Architecture Performance Evaluation (Astro Jamstack SSG + Islands Architecture)"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header-bar">
+        <div class="header-title">
+          <h1>Academic Assessment Management System</h1>
+          <p>
+            Empirical Benchmark View — Data Load: <strong>{count.toLocaleString('en-US')} Entries</strong> (cf. Fahrudin et al., 2025 [Ref 17])
+          </p>
+        </div>
+        <span class="arch-badge">Astro Jamstack (SSG + Islands Architecture)</span>
+      </header>
+
+      <nav class="stage-nav" aria-label="Data Load Stage Selector">
+        <span>Data Load Stage (N):</span>
+        {STAGES.map((stage) => (
+          <a
+            href={`/assessments/${stage}`}
+            class={stage === count ? 'stage-link active' : 'stage-link'}
+          >
+            {stage.toLocaleString('en-US')}
+          </a>
+        ))}
+      </nav>
+
+      <section class="kpi-grid" aria-label="Assessment Summary Metrics">
+        <div class="kpi-card">
+          <div class="kpi-label">Total Loaded Entries</div>
+          <div class="kpi-value">{count.toLocaleString('en-US')}</div>
+          <div class="kpi-sub">Pre-rendered at build time (SSG)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Mean Score</div>
+          <div class="kpi-value">{stats.avgScore}%</div>
+          <div class="kpi-sub">Across 8 academic courses</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Pass Rate (Score &ge; 50)</div>
+          <div class="kpi-value">{stats.passRate}%</div>
+          <div class="kpi-sub">{stats.distinctionCount.toLocaleString('en-US')} with distinction</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Retake Required</div>
+          <div class="kpi-value">{stats.retakeCount.toLocaleString('en-US')}</div>
+          <div class="kpi-sub">Flagged for review: <span id="flagged-counter">0</span></div>
+        </div>
+      </section>
+
+      <!-- Interactive Filter Island: Only this toolbar & event delegation runs JS; the N table rows are Zero-JS Static HTML -->
+      <section class="filter-toolbar" aria-label="Interactive Filter Controls">
+        <div class="filter-controls">
+          <input
+            id="search-input"
+            type="search"
+            class="filter-input"
+            placeholder="Search student, ID, or course..."
+            aria-label="Search assessments"
+          />
+          <select id="status-select" class="filter-select" aria-label="Filter by status">
+            <option value="ALL">All Statuses</option>
+            <option value="Distinction">Distinction</option>
+            <option value="Passed">Passed</option>
+            <option value="Retake Required">Retake Required</option>
+          </select>
+          <select id="course-select" class="filter-select" aria-label="Filter by course">
+            <option value="ALL">All Courses</option>
+            <option value="CS-301">CS-301 Web Arch</option>
+            <option value="CS-204">CS-204 Distributed Sys</option>
+            <option value="RM-401">RM-401 Research Methods</option>
+            <option value="DS-302">DS-302 Data Science</option>
+            <option value="SE-210">SE-210 Frontend Perf</option>
+            <option value="NW-105">NW-105 Networking</option>
+            <option value="AI-404">AI-404 Knowledge Graphs</option>
+            <option value="SEC-202">SEC-202 Web Security</option>
+          </select>
+          <button id="reset-btn" type="button" class="filter-btn">
+            Reset Filters
+          </button>
+        </div>
+        <div class="filter-status">
+          Showing <strong id="visible-count">{count.toLocaleString('en-US')}</strong> of{' '}
+          <strong>{count.toLocaleString('en-US')}</strong> records
+        </div>
+      </section>
+
+      <!-- Zero-JS Static HTML Data Table (No VDOM / No Hydration Payload) -->
+      <section class="table-card" aria-label="Academic Assessments Data Table">
+        <table class="assessment-table" id="assessment-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Student ID</th>
+              <th>Student Name</th>
+              <th>Course</th>
+              <th>Category</th>
+              <th>Assessment Type</th>
+              <th>Semester</th>
+              <th>ECTS</th>
+              <th>Score</th>
+              <th>Grade</th>
+              <th>Status</th>
+              <th>Evaluated</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <tr
+                class="assessment-row"
+                data-status={item.status}
+                data-course={item.courseCode}
+                data-search={`${item.id} ${item.studentName} ${item.courseName}`.toLowerCase()}
+              >
+                <td class="code-cell">{item.id}</td>
+                <td class="code-cell">{item.studentId}</td>
+                <td><strong>{item.studentName}</strong></td>
+                <td>{item.courseCode} – {item.courseName}</td>
+                <td>{item.category}</td>
+                <td>{item.assessmentType}</td>
+                <td>{item.semester}</td>
+                <td>{item.credits}</td>
+                <td>
+                  <div class="score-bar-wrap">
+                    <span class="score-num">{item.score}</span>
+                  </div>
+                </td>
+                <td>{item.grade}</td>
+                <td>
+                  <span class={getStatusBadgeClass(item.status)}>{item.status}</span>
+                </td>
+                <td class="code-cell">{item.evaluatedAt}</td>
+                <td>
+                  <button type="button" class="filter-btn flag-btn">
+                    Flag
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <script is:inline>
+      // Lightweight Island Script (< 1.2 kB): Zero Virtual DOM hydration overhead on load!
+      (() => {
+        const searchInput = document.getElementById('search-input');
+        const statusSelect = document.getElementById('status-select');
+        const courseSelect = document.getElementById('course-select');
+        const resetBtn = document.getElementById('reset-btn');
+        const visibleCountEl = document.getElementById('visible-count');
+        const flaggedCounterEl = document.getElementById('flagged-counter');
+        const table = document.getElementById('assessment-table');
+        let flaggedCount = 0;
+
+        function applyFilters() {
+          const q = (searchInput.value || '').trim().toLowerCase();
+          const status = statusSelect.value;
+          const course = courseSelect.value;
+          const rows = table.querySelectorAll('tbody tr.assessment-row');
+          let visible = 0;
+
+          for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            const matchStatus = status === 'ALL' || row.dataset.status === status;
+            const matchCourse = course === 'ALL' || row.dataset.course === course;
+            const matchQuery = !q || (row.dataset.search && row.dataset.search.includes(q));
+            if (matchStatus && matchCourse && matchQuery) {
+              row.style.display = '';
+              visible++;
+            } else {
+              row.style.display = 'none';
+            }
+          }
+          visibleCountEl.textContent = visible.toLocaleString('en-US');
+        }
+
+        searchInput.addEventListener('input', applyFilters);
+        statusSelect.addEventListener('change', applyFilters);
+        courseSelect.addEventListener('change', applyFilters);
+        resetBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          statusSelect.value = 'ALL';
+          courseSelect.value = 'ALL';
+          applyFilters();
+        });
+
+        table.addEventListener('click', (e) => {
+          const btn = e.target.closest('.flag-btn');
+          if (!btn) return;
+          const isFlagged = btn.dataset.flagged === 'true';
+          btn.dataset.flagged = isFlagged ? 'false' : 'true';
+          btn.textContent = isFlagged ? 'Flag' : 'Flagged';
+          flaggedCount += isFlagged ? -1 : 1;
+          flaggedCounterEl.textContent = String(flaggedCount);
+        });
+      })();
+    </script>
+  </body>
+</html>
