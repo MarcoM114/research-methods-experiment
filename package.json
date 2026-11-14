@@ -6,9 +6,13 @@
   "type": "module",
   "scripts": {
     "generate:data": "node data/generate-data.mjs",
+    "dev:nextjs": "npm run generate:data && npm --prefix apps/jamstack-nextjs run dev",
+    "dev:astro": "npm run generate:data && npm --prefix apps/jamstack-astro run dev",
     "build:nextjs": "npm --prefix apps/jamstack-nextjs run build",
     "build:astro": "npm --prefix apps/jamstack-astro run build",
     "build": "npm run generate:data && npm run build:nextjs && npm run build:astro",
+    "start:nextjs": "npx serve apps/jamstack-nextjs/out -l 3001",
+    "start:astro": "npx serve apps/jamstack-astro/dist -l 3002",
     "benchmark": "node benchmarks/run-lighthouse.mjs",
     "benchmark:quick": "node benchmarks/run-lighthouse.mjs --runs 2",
     "analyze": "node benchmarks/analyze-results.mjs",

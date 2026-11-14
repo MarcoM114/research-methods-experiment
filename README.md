@@ -70,21 +70,70 @@ research-methods-experiment/
 └── README.md
 ```
 
-### Befehle zum lokalen Ausführen / Reproduzieren
+### 4.1 Applikationen lokal im Browser ansehen (OHNE Benchmark-Test)
 
+Wenn ihr euch die beiden gebauten Web-Applikationen (**Next.js** und **Astro**) einfach im eigenen Browser anschauen und durch die verschiedenen Datenmengen (`10` bis `10.000` Einträge) klicken wollt, braucht ihr **keinen** Lighthouse-Benchmark zu starten.
+
+#### Schritt 1: Einmalig Abhängigkeiten installieren (im Hauptverzeichnis des Repos)
 ```bash
-# 1. Abhängigkeiten installieren
 npm install
 npm --prefix apps/jamstack-nextjs install
 npm --prefix apps/jamstack-astro install
+```
 
-# 2. Deterministische Datensätze (10, 50, 100, 500, 1000, 5000, 10000) generieren & beide Apps bauen
+#### Schritt 2 (Option A – Schnellster Weg im Entwicklungsmodus / Dev-Server):
+Startet einfach eine (oder in zwei Terminal-Fenstern beide) Applikationen direkt aus dem Hauptverzeichnis. Die Testdaten (`10` bis `10.000` Einträge) werden dabei automatisch vorab generiert:
+
+- **Next.js App starten (Port 3001):**
+  ```bash
+  npm run dev:nextjs
+  ```
+  👉 Öffnet im Browser: **http://localhost:3001** (oder direkt z. B. **http://localhost:3001/assessments/100**)
+
+- **Astro Islands App starten (Port 3002):**
+  ```bash
+  npm run dev:astro
+  ```
+  👉 Öffnet im Browser: **http://localhost:3002** (oder direkt z. B. **http://localhost:3002/assessments/100**)
+
+#### Schritt 2 (Option B – Als fertiger Produktions-Build wie im echten Experiment):
+Wenn ihr exakt die vorab generierten statischen HTML-Seiten (*Static Site Generation*) testen wollt, wie sie auch im Experiment gemessen wurden:
+
+```bash
+# 1. Einmalig Datensätze generieren & beide Produktions-Builds erstellen
 npm run build
 
-# 3. Automatisierten Google Lighthouse Benchmark starten (Standard: n=5 Durchläufe pro Stufe)
+# 2a. Next.js Production-Build auf Port 3001 starten:
+npm run start:nextjs
+
+# 2b. (Oder in einem 2. Terminal) Astro Production-Build auf Port 3002 starten:
+npm run start:astro
+```
+
+#### Verfügbare Seiten / URLs in beiden Apps:
+Auf der Startseite (`http://localhost:3001` bzw. `http://localhost:3002`) könnt ihr oben über die Navigationsleiste direkt zwischen allen **7 Datenlast-Stufen** wechseln und auch die **Such-/Filterfunktion sowie den Sortier-Button** ausprobieren:
+- `/assessments/10` (10 Einträge)
+- `/assessments/50` (50 Einträge)
+- `/assessments/100` (100 Einträge)
+- `/assessments/500` (500 Einträge)
+- `/assessments/1000` (1.000 Einträge)
+- `/assessments/5000` (5.000 Einträge)
+- `/assessments/10000` (10.000 Einträge)
+
+---
+
+### 4.2 Optional: Automatisierten Google-Lighthouse-Benchmark komplett neu ausführen
+
+*(Nur nötig, wenn ihr alle 70 Lighthouse-Messungen noch einmal komplett neu durchlaufen lassen wollt)*
+
+```bash
+# 1. Datensätze generieren & beide Apps bauen
+npm run build
+
+# 2. Automatisierten Google Lighthouse Benchmark starten (Standard: n=5 Durchläufe pro Stufe = 70 Runs)
 npm run benchmark
 
-# 4. Statistische Auswertung, Vergleichstabellen mit [17] & SVG-Diagramme generieren
+# 3. Statistische Auswertung, Vergleichstabellen mit [17] & SVG-Diagramme generieren
 npm run analyze
 ```
 
