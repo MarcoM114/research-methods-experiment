@@ -1,153 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 460" width="100%" height="100%">
-  <rect width="860" height="460" fill="#ffffff" rx="8" stroke="#cbd5e1" stroke-width="1" />
-  <text x="75" y="32" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#0f172a">Total Blocking Time (TBT) Across Variable Data Loads (Lower is Better)</text>
-  <text x="75" y="52" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">Hydration Tax vs. Zero-JS Islands vs. SSR/CSR Baselines from Fahrudin et al. (2025) [Ref 17]</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 545" width="100%" height="100%">
+  <rect width="960" height="545" fill="#ffffff" rx="8" stroke="#cbd5e1" stroke-width="1" />
+  <text x="82" y="32" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#0f172a">Total Blocking Time (TBT) Across Variable Data Loads (Lower is Better)</text>
+  <text x="82" y="52" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">Hydration Tax vs. Zero-JS Islands vs. SSR/CSR Baselines from Fahrudin et al. (2025) [Ref 17]</text>
   
-      <line x1="75" y1="375" x2="820" y2="375" stroke="#e2e8f0" stroke-dasharray="none" stroke-width="1" />
-      <text x="65" y="379" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">0</text>
+      <line x1="82" y1="400" x2="916" y2="400" stroke="#e2e8f0" stroke-dasharray="none" stroke-width="1" />
+      <text x="72" y="404" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">0</text>
     
-      <line x1="75" y1="315" x2="820" y2="315" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
-      <text x="65" y="319" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">1089</text>
+      <line x1="82" y1="335.2" x2="916" y2="335.2" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
+      <text x="72" y="339.2" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">1089</text>
     
-      <line x1="75" y1="255" x2="820" y2="255" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
-      <text x="65" y="259" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">2177</text>
+      <line x1="82" y1="270.4" x2="916" y2="270.4" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
+      <text x="72" y="274.4" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">2177</text>
     
-      <line x1="75" y1="195" x2="820" y2="195" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
-      <text x="65" y="199" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">3266</text>
+      <line x1="82" y1="205.6" x2="916" y2="205.6" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
+      <text x="72" y="209.6" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">3266</text>
     
-      <line x1="75" y1="135.00000000000003" x2="820" y2="135.00000000000003" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
-      <text x="65" y="139.00000000000003" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">4355</text>
+      <line x1="82" y1="140.8" x2="916" y2="140.8" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
+      <text x="72" y="144.8" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">4355</text>
     
-      <line x1="75" y1="75.00000000000006" x2="820" y2="75.00000000000006" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
-      <text x="65" y="79.00000000000006" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">5443</text>
+      <line x1="82" y1="76.00000000000006" x2="916" y2="76.00000000000006" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
+      <text x="72" y="80.00000000000006" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">5443</text>
     
-  <line x1="75" y1="75" x2="75" y2="375" stroke="#64748b" stroke-width="1.2" />
-  <line x1="75" y1="375" x2="820" y2="375" stroke="#64748b" stroke-width="1.2" />
+  <line x1="82" y1="76" x2="82" y2="400" stroke="#64748b" stroke-width="1.2" />
+  <line x1="82" y1="400" x2="916" y2="400" stroke="#64748b" stroke-width="1.2" />
   
-      <line x1="75" y1="375" x2="75" y2="381" stroke="#64748b" stroke-width="1" />
-      <text x="75" y="399" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">10</text>
+      <line x1="82" y1="400" x2="82" y2="406" stroke="#64748b" stroke-width="1" />
+      <text x="82" y="424" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">10</text>
     
-      <line x1="199.16666666666666" y1="375" x2="199.16666666666666" y2="381" stroke="#64748b" stroke-width="1" />
-      <text x="199.16666666666666" y="399" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">50</text>
+      <line x1="221" y1="400" x2="221" y2="406" stroke="#64748b" stroke-width="1" />
+      <text x="221" y="424" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">50</text>
     
-      <line x1="323.3333333333333" y1="375" x2="323.3333333333333" y2="381" stroke="#64748b" stroke-width="1" />
-      <text x="323.3333333333333" y="399" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">100</text>
+      <line x1="360" y1="400" x2="360" y2="406" stroke="#64748b" stroke-width="1" />
+      <text x="360" y="424" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">100</text>
     
-      <line x1="447.5" y1="375" x2="447.5" y2="381" stroke="#64748b" stroke-width="1" />
-      <text x="447.5" y="399" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">500</text>
+      <line x1="499" y1="400" x2="499" y2="406" stroke="#64748b" stroke-width="1" />
+      <text x="499" y="424" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">500</text>
     
-      <line x1="571.6666666666666" y1="375" x2="571.6666666666666" y2="381" stroke="#64748b" stroke-width="1" />
-      <text x="571.6666666666666" y="399" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">1,000</text>
+      <line x1="638" y1="400" x2="638" y2="406" stroke="#64748b" stroke-width="1" />
+      <text x="638" y="424" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">1,000</text>
     
-      <line x1="695.8333333333334" y1="375" x2="695.8333333333334" y2="381" stroke="#64748b" stroke-width="1" />
-      <text x="695.8333333333334" y="399" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">5,000</text>
+      <line x1="777" y1="400" x2="777" y2="406" stroke="#64748b" stroke-width="1" />
+      <text x="777" y="424" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">5,000</text>
     
-      <line x1="820" y1="375" x2="820" y2="381" stroke="#64748b" stroke-width="1" />
-      <text x="820" y="399" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">10,000</text>
+      <line x1="916" y1="400" x2="916" y2="406" stroke="#64748b" stroke-width="1" />
+      <text x="916" y="424" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1e293b">10,000</text>
     
-  <text x="447.5" y="419" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#334155">Dataset Load Stage (Number of Rendered Assessment Entries N)</text>
-  <text x="20" y="225" text-anchor="middle" transform="rotate(-90, 20, 225)" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#334155">Total Blocking Time (Milliseconds)</text>
+  <text x="499" y="448" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#334155">Dataset Load Stage (Number of Rendered Assessment Entries N)</text>
+  <text x="22" y="238" text-anchor="middle" transform="rotate(-90, 22, 238)" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#334155">Total Blocking Time (Milliseconds)</text>
   
-      <path d="M 75.0 375.0 L 199.2 375.0 L 323.3 375.0 L 447.5 374.8 L 571.7 371.6 L 695.8 302.9 L 820.0 227.5" fill="none" stroke="#059669" stroke-width="3" stroke-dasharray="none" />
+      <path d="M 82.0 400.0 L 221.0 400.0 L 360.0 400.0 L 499.0 399.8 L 638.0 396.3 L 777.0 322.1 L 916.0 240.7" fill="none" stroke="#059669" stroke-width="3" stroke-dasharray="none" />
     
-        <circle cx="75.0" cy="375.0" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="82.0" cy="400.0" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="199.2" cy="375.0" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="221.0" cy="400.0" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="323.3" cy="375.0" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="360.0" cy="400.0" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="447.5" cy="374.8" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="499.0" cy="399.8" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="571.7" cy="371.6" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="638.0" cy="396.3" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="695.8" cy="302.9" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="777.0" cy="322.1" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="820.0" cy="227.5" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="916.0" cy="240.7" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-      <path d="M 75.0 375.0 L 199.2 375.0 L 323.3 375.0 L 447.5 374.4 L 571.7 371.7 L 695.8 318.2 L 820.0 245.8" fill="none" stroke="#2563eb" stroke-width="3" stroke-dasharray="none" />
+      <path d="M 82.0 400.0 L 221.0 400.0 L 360.0 400.0 L 499.0 399.4 L 638.0 396.4 L 777.0 338.6 L 916.0 260.5" fill="none" stroke="#2563eb" stroke-width="3" stroke-dasharray="none" />
     
-        <circle cx="75.0" cy="375.0" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="82.0" cy="400.0" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="199.2" cy="375.0" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="221.0" cy="400.0" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="323.3" cy="375.0" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="360.0" cy="400.0" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="447.5" cy="374.4" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="499.0" cy="399.4" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="571.7" cy="371.7" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="638.0" cy="396.4" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="695.8" cy="318.2" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="777.0" cy="338.6" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="820.0" cy="245.8" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="916.0" cy="260.5" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-      <path d="M 75.0 375.0 L 199.2 375.0 L 323.3 375.0 L 447.5 363.4 L 571.7 346.9 L 695.8 280.8 L 820.0 107.1" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" />
+      <path d="M 82.0 400.0 L 221.0 400.0 L 360.0 400.0 L 499.0 387.5 L 638.0 369.6 L 777.0 298.2 L 916.0 110.7" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" />
     
-        <circle cx="75.0" cy="375.0" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="82.0" cy="400.0" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="199.2" cy="375.0" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="221.0" cy="400.0" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="323.3" cy="375.0" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="360.0" cy="400.0" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="447.5" cy="363.4" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="499.0" cy="387.5" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="571.7" cy="346.9" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="638.0" cy="369.6" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="695.8" cy="280.8" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="777.0" cy="298.2" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="820.0" cy="107.1" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="916.0" cy="110.7" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-      <path d="M 75.0 375.0 L 199.2 375.0 L 323.3 375.0 L 447.5 375.0 L 571.7 371.7 L 695.8 344.1 L 820.0 339.2" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="6 4" />
+      <path d="M 82.0 400.0 L 221.0 400.0 L 360.0 400.0 L 499.0 400.0 L 638.0 396.4 L 777.0 366.7 L 916.0 361.3" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="6 4" />
     
-        <circle cx="75.0" cy="375.0" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="82.0" cy="400.0" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="199.2" cy="375.0" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="221.0" cy="400.0" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="323.3" cy="375.0" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="360.0" cy="400.0" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="447.5" cy="375.0" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="499.0" cy="400.0" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="571.7" cy="371.7" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="638.0" cy="396.4" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="695.8" cy="344.1" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="777.0" cy="366.7" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="820.0" cy="339.2" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="916.0" cy="361.3" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-      <path d="M 75.0 375.0 L 199.2 375.0 L 323.3 375.0 L 447.5 373.3 L 571.7 371.7 L 695.8 348.5 L 820.0 323.7" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 4" />
+      <path d="M 82.0 400.0 L 221.0 400.0 L 360.0 400.0 L 499.0 398.2 L 638.0 396.4 L 777.0 371.4 L 916.0 344.6" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 4" />
     
-        <circle cx="75.0" cy="375.0" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="82.0" cy="400.0" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="199.2" cy="375.0" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="221.0" cy="400.0" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="323.3" cy="375.0" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="360.0" cy="400.0" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="447.5" cy="373.3" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="499.0" cy="398.2" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="571.7" cy="371.7" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="638.0" cy="396.4" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="695.8" cy="348.5" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="777.0" cy="371.4" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="820.0" cy="323.7" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="916.0" cy="344.6" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
   
-      <line x1="75" y1="418" x2="97" y2="418" stroke="#059669" stroke-width="3" stroke-dasharray="none" />
-      <circle cx="86" cy="418" r="3.5" fill="#059669" />
-      <text x="103" y="422" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a">Astro Jamstack (Islands) [Own Study]</text>
+    <rect x="82" y="466" width="834" height="70" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+  
+      <line x1="98" y1="482" x2="122" y2="482" stroke="#059669" stroke-width="3" stroke-dasharray="none" />
+      <circle cx="110" cy="482" r="3.5" fill="#059669" />
+      <text x="130" y="486" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a">Astro Jamstack (Islands) [Own Study]</text>
     
-      <line x1="330" y1="418" x2="352" y2="418" stroke="#2563eb" stroke-width="3" stroke-dasharray="none" />
-      <circle cx="341" cy="418" r="3.5" fill="#2563eb" />
-      <text x="358" y="422" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a">Next.js Jamstack (SSG + Hydration) [Own Study]</text>
+      <line x1="518" y1="482" x2="542" y2="482" stroke="#2563eb" stroke-width="3" stroke-dasharray="none" />
+      <circle cx="530" cy="482" r="3.5" fill="#2563eb" />
+      <text x="550" y="486" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a">Next.js Jamstack (SSG + Hydration) [Own Study]</text>
     
-      <line x1="585" y1="418" x2="607" y2="418" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 3" />
-      <circle cx="596" cy="418" r="3.5" fill="#dc2626" />
-      <text x="613" y="422" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="500" fill="#0f172a">Laravel Blade (SSR) [Fahrudin et al., 2025]</text>
+      <line x1="98" y1="502" x2="122" y2="502" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 3" />
+      <circle cx="110" cy="502" r="3.5" fill="#dc2626" />
+      <text x="130" y="506" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="500" fill="#0f172a">Laravel Blade (SSR) [Fahrudin et al., 2025]</text>
     
-      <line x1="75" y1="438" x2="97" y2="438" stroke="#d97706" stroke-width="2" stroke-dasharray="5 3" />
-      <circle cx="86" cy="438" r="3.5" fill="#d97706" />
-      <text x="103" y="442" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="500" fill="#0f172a">React (SPA / CSR) [Fahrudin et al., 2025]</text>
+      <line x1="518" y1="502" x2="542" y2="502" stroke="#d97706" stroke-width="2" stroke-dasharray="5 3" />
+      <circle cx="530" cy="502" r="3.5" fill="#d97706" />
+      <text x="550" y="506" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="500" fill="#0f172a">React (SPA / CSR) [Fahrudin et al., 2025]</text>
     
-      <line x1="330" y1="438" x2="352" y2="438" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5 3" />
-      <circle cx="341" cy="438" r="3.5" fill="#7c3aed" />
-      <text x="358" y="442" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="500" fill="#0f172a">Vue (SPA / CSR) [Fahrudin et al., 2025]</text>
+      <line x1="98" y1="522" x2="122" y2="522" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5 3" />
+      <circle cx="110" cy="522" r="3.5" fill="#7c3aed" />
+      <text x="130" y="526" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="500" fill="#0f172a">Vue (SPA / CSR) [Fahrudin et al., 2025]</text>
     
 </svg>

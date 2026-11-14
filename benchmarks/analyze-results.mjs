@@ -73,12 +73,12 @@ function computeMedian(values) {
 }
 
 function generateLineChartSvg({ title, subtitle, yLabel, stages, series, maxYOverride }) {
-  const width = 860;
-  const height = 460;
-  const padLeft = 75;
-  const padRight = 40;
-  const padTop = 75;
-  const padBottom = 85;
+  const width = 960;
+  const height = 545;
+  const padLeft = 82;
+  const padRight = 44;
+  const padTop = 76;
+  const padBottom = 145;
   const plotW = width - padLeft - padRight;
   const plotH = height - padTop - padBottom;
 
@@ -128,16 +128,20 @@ function generateLineChartSvg({ title, subtitle, yLabel, stages, series, maxYOve
     });
   });
 
-  let legendItems = '';
+  // Clean legend box well below the X-axis title (2 columns with generous 430px spacing)
+  const legendTop = padTop + plotH + 66;
+  let legendItems = `
+    <rect x="${padLeft}" y="${legendTop}" width="${plotW}" height="70" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+  `;
   series.forEach((s, idx) => {
-    const col = idx % 3;
-    const row = Math.floor(idx / 3);
-    const lx = padLeft + col * 255;
-    const ly = height - 38 + row * 20;
+    const col = idx % 2;
+    const row = Math.floor(idx / 2);
+    const lx = padLeft + 16 + col * 420;
+    const ly = legendTop + 20 + row * 20;
     legendItems += `
-      <line x1="${lx}" y1="${ly - 4}" x2="${lx + 22}" y2="${ly - 4}" stroke="${s.color}" stroke-width="${s.isOwn ? '3' : '2'}" stroke-dasharray="${s.dashed ? '5 3' : 'none'}" />
-      <circle cx="${lx + 11}" cy="${ly - 4}" r="3.5" fill="${s.color}" />
-      <text x="${lx + 28}" y="${ly}" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="${s.isOwn ? '700' : '500'}" fill="#0f172a">${s.label}</text>
+      <line x1="${lx}" y1="${ly - 4}" x2="${lx + 24}" y2="${ly - 4}" stroke="${s.color}" stroke-width="${s.isOwn ? '3' : '2'}" stroke-dasharray="${s.dashed ? '5 3' : 'none'}" />
+      <circle cx="${lx + 12}" cy="${ly - 4}" r="3.5" fill="${s.color}" />
+      <text x="${lx + 32}" y="${ly}" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="${s.isOwn ? '700' : '500'}" fill="#0f172a">${s.label}</text>
     `;
   });
 
@@ -150,8 +154,8 @@ function generateLineChartSvg({ title, subtitle, yLabel, stages, series, maxYOve
   <line x1="${padLeft}" y1="${padTop}" x2="${padLeft}" y2="${padTop + plotH}" stroke="#64748b" stroke-width="1.2" />
   <line x1="${padLeft}" y1="${padTop + plotH}" x2="${width - padRight}" y2="${padTop + plotH}" stroke="#64748b" stroke-width="1.2" />
   ${xLabels}
-  <text x="${padLeft + plotW / 2}" y="${padTop + plotH + 44}" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#334155">Dataset Load Stage (Number of Rendered Assessment Entries N)</text>
-  <text x="20" y="${padTop + plotH / 2}" text-anchor="middle" transform="rotate(-90, 20, ${padTop + plotH / 2})" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#334155">${yLabel}</text>
+  <text x="${padLeft + plotW / 2}" y="${padTop + plotH + 48}" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#334155">Dataset Load Stage (Number of Rendered Assessment Entries N)</text>
+  <text x="22" y="${padTop + plotH / 2}" text-anchor="middle" transform="rotate(-90, 22, ${padTop + plotH / 2})" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#334155">${yLabel}</text>
   ${pathsAndPoints}
   ${legendItems}
 </svg>`;
