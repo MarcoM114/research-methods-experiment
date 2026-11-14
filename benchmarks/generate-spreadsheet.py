@@ -146,7 +146,7 @@ def main():
             "chart_title": "Largest Contentful Paint (LCP) Across Data Loads (s)",
             "metric": "lcp_s",
             "num_format": "0.000",
-            "chart_anchor": "H19",
+            "chart_anchor": "Q4",
         },
         {
             "start_row": 26,
@@ -155,7 +155,7 @@ def main():
             "chart_title": "Total Blocking Time (TBT) Across Data Loads (ms)",
             "metric": "tbt_ms",
             "num_format": "0.0",
-            "chart_anchor": "H34",
+            "chart_anchor": "H28",
         },
         {
             "start_row": 37,
@@ -164,7 +164,7 @@ def main():
             "chart_title": "Speed Index (SI) Across Data Loads (s)",
             "metric": "si_s",
             "num_format": "0.000",
-            "chart_anchor": "H49",
+            "chart_anchor": "Q28",
         },
     ]
 
@@ -222,8 +222,8 @@ def main():
         chart.y_axis.title = spec["y_axis"]
         chart.x_axis.title = "Dataset Size (N)"
         chart.legend.position = "b"
-        chart.width = 22
-        chart.height = 13
+        chart.width = 17
+        chart.height = 10.5
 
         data_ref = Reference(ws1, min_col=2, min_row=hdr_row, max_col=6, max_row=hdr_row + len(STAGES))
         cats_ref = Reference(ws1, min_col=1, min_row=hdr_row + 1, max_row=hdr_row + len(STAGES))
@@ -283,8 +283,8 @@ def main():
     norm_chart.y_axis.title = "Scaling Multiple S_N (x Baseline at N=10)"
     norm_chart.x_axis.title = "Dataset Size (N)"
     norm_chart.legend.position = "b"
-    norm_chart.width = 22
-    norm_chart.height = 13
+    norm_chart.width = 17
+    norm_chart.height = 10.5
 
     norm_data_ref = Reference(ws1, min_col=2, min_row=hdr_norm, max_col=6, max_row=hdr_norm + len(STAGES))
     norm_cats_ref = Reference(ws1, min_col=1, min_row=hdr_norm + 1, max_row=hdr_norm + len(STAGES))
@@ -294,7 +294,7 @@ def main():
         s.graphicalProperties.line.solidFill = series_colors[s_idx]
         s.graphicalProperties.line.width = 28000 if s_idx < 2 else 22000
         s.smooth = False
-    ws1.add_chart(norm_chart, "H64")
+    ws1.add_chart(norm_chart, "H52")
 
     # Table 6: Hardware-Calibrated LCP (M_calib = k_hw * M_own, k_hw = 1.170)
     r0_cal = 59
@@ -337,6 +337,25 @@ def main():
                 cell.font = data_font
                 cell.alignment = right_align
                 cell.number_format = "0.000"
+
+    cal_chart = LineChart()
+    cal_chart.title = "Hardware-Calibrated LCP* Across Data Loads (k_hw = 1.170)"
+    cal_chart.style = 10
+    cal_chart.y_axis.title = "Calibrated LCP* Time (s)"
+    cal_chart.x_axis.title = "Dataset Size (N)"
+    cal_chart.legend.position = "b"
+    cal_chart.width = 17
+    cal_chart.height = 10.5
+
+    cal_data_ref = Reference(ws1, min_col=2, min_row=hdr_cal, max_col=6, max_row=hdr_cal + len(STAGES))
+    cal_cats_ref = Reference(ws1, min_col=1, min_row=hdr_cal + 1, max_row=hdr_cal + len(STAGES))
+    cal_chart.add_data(cal_data_ref, titles_from_data=True)
+    cal_chart.set_categories(cal_cats_ref)
+    for s_idx, s in enumerate(cal_chart.series):
+        s.graphicalProperties.line.solidFill = series_colors[s_idx]
+        s.graphicalProperties.line.width = 28000 if s_idx < 2 else 22000
+        s.smooth = False
+    ws1.add_chart(cal_chart, "Q52")
 
     for col_idx, width in enumerate([16, 22, 22, 22, 22, 22, 4], start=1):
         ws1.column_dimensions[get_column_letter(col_idx)].width = width
