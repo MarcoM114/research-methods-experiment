@@ -126,6 +126,10 @@ def main():
             "chart_title": "1. First Contentful Paint (FCP) Across Data Loads (s)",
             "metric": "fcp_s",
             "num_format": "0.000",
+            "y_min": 0,
+            "y_max": 8,
+            "y_unit": 2,
+            "y_num_format": "0",
             "chart_anchor": "H4",
         },
         {
@@ -135,6 +139,10 @@ def main():
             "chart_title": "2. Largest Contentful Paint (LCP) Across Data Loads (s)",
             "metric": "lcp_s",
             "num_format": "0.000",
+            "y_min": 0,
+            "y_max": 8,
+            "y_unit": 2,
+            "y_num_format": "0",
             "chart_anchor": "Q4",
         },
         {
@@ -144,6 +152,10 @@ def main():
             "chart_title": "3. Total Blocking Time (TBT) Across Data Loads (ms)",
             "metric": "tbt_ms",
             "num_format": "0.0",
+            "y_min": 0,
+            "y_max": 5000,
+            "y_unit": 1000,
+            "y_num_format": "0",
             "chart_anchor": "H28",
         },
         {
@@ -153,6 +165,10 @@ def main():
             "chart_title": "4. Speed Index (SI) Across Data Loads (s)",
             "metric": "si_s",
             "num_format": "0.000",
+            "y_min": 0,
+            "y_max": 8,
+            "y_unit": 2,
+            "y_num_format": "0",
             "chart_anchor": "Q28",
         },
         {
@@ -162,6 +178,10 @@ def main():
             "chart_title": "5. Cumulative Layout Shift (CLS) Across Data Loads",
             "metric": "cls",
             "num_format": "0.0000",
+            "y_min": 0,
+            "y_max": 0.012,
+            "y_unit": 0.003,
+            "y_num_format": "0.000",
             "chart_anchor": "H52",
         },
     ]
@@ -217,6 +237,11 @@ def main():
         chart.title = spec["chart_title"]
         chart.style = 10
         chart.y_axis.title = spec["y_axis"]
+        chart.y_axis.scaling.min = spec["y_min"]
+        chart.y_axis.scaling.max = spec["y_max"]
+        chart.y_axis.majorUnit = spec["y_unit"]
+        chart.y_axis.number_format = spec["y_num_format"]
+        chart.y_axis.sourceLinked = False
         chart.x_axis.title = "Dataset Size (N)"
         chart.legend.position = "b"
         chart.width = 17
@@ -373,6 +398,11 @@ def main():
     norm_chart.title = "Normalized LCP Scaling Factor (S_N = LCP_N / LCP_10)"
     norm_chart.style = 10
     norm_chart.y_axis.title = "Scaling Multiple S_N (x Baseline at N=10)"
+    norm_chart.y_axis.scaling.min = 0
+    norm_chart.y_axis.scaling.max = 24
+    norm_chart.y_axis.majorUnit = 4
+    norm_chart.y_axis.number_format = "0"
+    norm_chart.y_axis.sourceLinked = False
     norm_chart.x_axis.title = "Dataset Size (N)"
     norm_chart.legend.position = "b"
     norm_chart.width = 18

@@ -8,19 +8,19 @@
       <text x="72" y="404" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">0.00</text>
     
       <line x1="82" y1="335.2" x2="916" y2="335.2" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
-      <text x="72" y="339.2" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">5.11</text>
+      <text x="72" y="339.2" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">4.80</text>
     
       <line x1="82" y1="270.4" x2="916" y2="270.4" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
-      <text x="72" y="274.4" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">10.22</text>
+      <text x="72" y="274.4" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">9.60</text>
     
       <line x1="82" y1="205.6" x2="916" y2="205.6" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
-      <text x="72" y="209.6" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">15.32</text>
+      <text x="72" y="209.6" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">14.40</text>
     
       <line x1="82" y1="140.8" x2="916" y2="140.8" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
-      <text x="72" y="144.8" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">20.43</text>
+      <text x="72" y="144.8" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">19.20</text>
     
       <line x1="82" y1="76" x2="916" y2="76" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" />
-      <text x="72" y="80" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">25.54</text>
+      <text x="72" y="80" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">24.00</text>
     
   <line x1="82" y1="76" x2="82" y2="400" stroke="#64748b" stroke-width="1.2" />
   <line x1="82" y1="400" x2="916" y2="400" stroke="#64748b" stroke-width="1.2" />
@@ -49,85 +49,85 @@
   <text x="499" y="448" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#334155">Dataset Load Stage (Number of Rendered Assessment Entries N)</text>
   <text x="22" y="238" text-anchor="middle" transform="rotate(-90, 22, 238)" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#334155">Normalized Scaling Factor S_N (Multiple of N=10)</text>
   
-      <path d="M 82.0 387.3 L 221.0 386.3 L 360.0 385.9 L 499.0 370.1 L 638.0 357.8 L 777.0 248.3 L 916.0 110.8" fill="none" stroke="#059669" stroke-width="3" stroke-dasharray="none" />
+      <path d="M 82.0 386.5 L 221.0 385.4 L 360.0 385.0 L 499.0 368.1 L 638.0 355.0 L 777.0 238.5 L 916.0 92.2" fill="none" stroke="#059669" stroke-width="3" stroke-dasharray="none" />
     
-        <circle cx="82.0" cy="387.3" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="82.0" cy="386.5" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="221.0" cy="386.3" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="221.0" cy="385.4" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="360.0" cy="385.9" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="360.0" cy="385.0" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="499.0" cy="370.1" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="499.0" cy="368.1" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="638.0" cy="357.8" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="638.0" cy="355.0" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="777.0" cy="248.3" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="777.0" cy="238.5" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="916.0" cy="110.8" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="916.0" cy="92.2" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.5" />
       
-      <path d="M 82.0 387.3 L 221.0 386.4 L 360.0 385.8 L 499.0 381.7 L 638.0 373.6 L 777.0 316.0 L 916.0 243.5" fill="none" stroke="#2563eb" stroke-width="3" stroke-dasharray="none" />
+      <path d="M 82.0 386.5 L 221.0 385.6 L 360.0 384.9 L 499.0 380.6 L 638.0 371.9 L 777.0 310.6 L 916.0 233.4" fill="none" stroke="#2563eb" stroke-width="3" stroke-dasharray="none" />
     
-        <circle cx="82.0" cy="387.3" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="82.0" cy="386.5" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="221.0" cy="386.4" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="221.0" cy="385.6" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="360.0" cy="385.8" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="360.0" cy="384.9" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="499.0" cy="381.7" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="499.0" cy="380.6" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="638.0" cy="373.6" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="638.0" cy="371.9" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="777.0" cy="316.0" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="777.0" cy="310.6" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="916.0" cy="243.5" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="916.0" cy="233.4" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5" />
       
-      <path d="M 82.0 387.3 L 221.0 390.5 L 360.0 390.5 L 499.0 387.3 L 638.0 384.1 L 777.0 352.4 L 916.0 301.7" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" />
+      <path d="M 82.0 386.5 L 221.0 389.9 L 360.0 389.9 L 499.0 386.5 L 638.0 383.1 L 777.0 349.4 L 916.0 295.4" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" />
     
-        <circle cx="82.0" cy="387.3" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="82.0" cy="386.5" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="221.0" cy="390.5" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="221.0" cy="389.9" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="360.0" cy="390.5" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="360.0" cy="389.9" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="499.0" cy="387.3" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="499.0" cy="386.5" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="638.0" cy="384.1" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="638.0" cy="383.1" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="777.0" cy="352.4" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="777.0" cy="349.4" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="916.0" cy="301.7" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="916.0" cy="295.4" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5" />
       
-      <path d="M 82.0 387.3 L 221.0 387.3 L 360.0 387.3 L 499.0 387.3 L 638.0 383.1 L 777.0 359.8 L 916.0 277.3" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="6 4" />
+      <path d="M 82.0 386.5 L 221.0 386.5 L 360.0 386.5 L 499.0 386.5 L 638.0 382.0 L 777.0 357.2 L 916.0 269.5" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="6 4" />
     
-        <circle cx="82.0" cy="387.3" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="82.0" cy="386.5" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="221.0" cy="387.3" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="221.0" cy="386.5" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="360.0" cy="387.3" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="360.0" cy="386.5" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="499.0" cy="387.3" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="499.0" cy="386.5" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="638.0" cy="383.1" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="638.0" cy="382.0" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="777.0" cy="359.8" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="777.0" cy="357.2" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="916.0" cy="277.3" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="916.0" cy="269.5" r="3.5" fill="#d97706" stroke="#ffffff" stroke-width="1.5" />
       
-      <path d="M 82.0 387.3 L 221.0 384.8 L 360.0 384.8 L 499.0 379.7 L 638.0 377.2 L 777.0 354.3 L 916.0 275.7" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 4" />
+      <path d="M 82.0 386.5 L 221.0 383.8 L 360.0 383.8 L 499.0 378.4 L 638.0 375.7 L 777.0 351.4 L 916.0 267.7" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 4" />
     
-        <circle cx="82.0" cy="387.3" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="82.0" cy="386.5" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="221.0" cy="384.8" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="221.0" cy="383.8" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="360.0" cy="384.8" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="360.0" cy="383.8" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="499.0" cy="379.7" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="499.0" cy="378.4" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="638.0" cy="377.2" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="638.0" cy="375.7" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="777.0" cy="354.3" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="777.0" cy="351.4" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
-        <circle cx="916.0" cy="275.7" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
+        <circle cx="916.0" cy="267.7" r="3.5" fill="#7c3aed" stroke="#ffffff" stroke-width="1.5" />
       
   
     <rect x="82" y="466" width="834" height="70" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />

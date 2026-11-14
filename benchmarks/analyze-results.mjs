@@ -235,35 +235,43 @@ function main() {
 
   const stages = metadata.stages || [10, 50, 100, 500, 1000, 5000, 10000];
 
-  // Generate SVG charts with zero baseline (as required by Lecture 04 Slides 55-60)
+  // Generate SVG charts with zero baseline and clean integer Y-axis ticks (0, 2, 4, 6, 8)
   const chartConfigs = [
     {
       filename: 'chart-fcp.svg',
       metric: 'fcp_s',
       title: 'First Contentful Paint (FCP) Across Variable Data Loads (Lower is Better)',
       subtitle: 'Comparison of Own Measurements (Next.js SSG, Astro Islands) vs. Fahrudin et al. (2025) [Ref 17]',
-      yLabel: 'FCP Time (Seconds)'
+      yLabel: 'FCP Time (Seconds)',
+      maxYOverride: 8,
+      yTicksOverride: 4
     },
     {
       filename: 'chart-lcp.svg',
       metric: 'lcp_s',
       title: 'Largest Contentful Paint (LCP) Across Variable Data Loads (Lower is Better)',
       subtitle: 'Comparison of Own Measurements (Next.js SSG, Astro Islands) vs. Fahrudin et al. (2025) [Ref 17]',
-      yLabel: 'LCP Time (Seconds)'
+      yLabel: 'LCP Time (Seconds)',
+      maxYOverride: 8,
+      yTicksOverride: 4
     },
     {
       filename: 'chart-tbt.svg',
       metric: 'tbt_ms',
       title: 'Total Blocking Time (TBT) Across Variable Data Loads (Lower is Better)',
       subtitle: 'Hydration Tax vs. Zero-JS Islands vs. SSR/CSR Baselines from Fahrudin et al. (2025) [Ref 17]',
-      yLabel: 'Total Blocking Time (Milliseconds)'
+      yLabel: 'Total Blocking Time (Milliseconds)',
+      maxYOverride: 5000,
+      yTicksOverride: 5
     },
     {
       filename: 'chart-si.svg',
       metric: 'si_s',
       title: 'Speed Index (SI) Across Variable Data Loads (Lower is Better)',
       subtitle: 'Visual Progression Comparison Across 5 Web Application Architectures',
-      yLabel: 'Speed Index (Seconds)'
+      yLabel: 'Speed Index (Seconds)',
+      maxYOverride: 8,
+      yTicksOverride: 4
     }
   ];
 
@@ -311,7 +319,9 @@ function main() {
       subtitle: cfg.subtitle,
       yLabel: cfg.yLabel,
       stages,
-      series
+      series,
+      maxYOverride: cfg.maxYOverride,
+      yTicksOverride: cfg.yTicksOverride
     });
     fs.writeFileSync(path.join(RESULTS_DIR, cfg.filename), svgContent, 'utf-8');
   }
@@ -376,7 +386,9 @@ function main() {
     subtitle: 'Dimensionless Degradation Multiple Relative to Each Architecture’s Own N=10 Baseline (1.0x)',
     yLabel: 'Normalized Scaling Factor S_N (Multiple of N=10)',
     stages,
-    series: normLcpSeries
+    series: normLcpSeries,
+    maxYOverride: 24,
+    yTicksOverride: 6
   });
   fs.writeFileSync(path.join(RESULTS_DIR, 'chart-normalized-lcp.svg'), normSvgContent, 'utf-8');
 
