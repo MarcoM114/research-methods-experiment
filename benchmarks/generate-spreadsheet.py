@@ -147,14 +147,15 @@ def main():
         },
         {
             "start_row": 26,
-            "title": "3. Total Blocking Time — TBT (Milliseconds, Lower is Better)",
-            "y_axis": "TBT (ms)",
-            "chart_title": "3. Total Blocking Time (TBT) Across Data Loads (ms)",
+            "title": "3. Total Blocking Time — TBT (Seconds, Lower is Better)",
+            "y_axis": "TBT Time (s)",
+            "chart_title": "3. Total Blocking Time (TBT) Across Data Loads (s)",
             "metric": "tbt_ms",
-            "num_format": "0.0",
+            "scale": 0.001,
+            "num_format": "0.000",
             "y_min": 0,
-            "y_max": 5000,
-            "y_unit": 1000,
+            "y_max": 8,
+            "y_unit": 2,
             "y_num_format": "0",
             "chart_anchor": "H28",
         },
@@ -210,15 +211,17 @@ def main():
             cell.border = thin_border
 
         metric = spec["metric"]
+        scale = spec.get("scale", 1.0)
+        decimals = 4 if metric == "cls" else 3
         for i, st in enumerate(STAGES):
             curr_r = hdr_row + 1 + i
             row_vals = [
                 f"N = {st:,}",
-                get_own_mean("astro-islands", st, metric),
-                get_own_mean("nextjs-ssg", st, metric),
-                FAHRUDIN_REF["blade-ssr"][st][metric],
-                FAHRUDIN_REF["react-csr"][st][metric],
-                FAHRUDIN_REF["vue-csr"][st][metric],
+                round(get_own_mean("astro-islands", st, metric) * scale, decimals),
+                round(get_own_mean("nextjs-ssg", st, metric) * scale, decimals),
+                round(FAHRUDIN_REF["blade-ssr"][st][metric] * scale, decimals),
+                round(FAHRUDIN_REF["react-csr"][st][metric] * scale, decimals),
+                round(FAHRUDIN_REF["vue-csr"][st][metric] * scale, decimals),
             ]
             for c_idx, val in enumerate(row_vals, start=1):
                 cell = ws1.cell(row=curr_r, column=c_idx, value=val)

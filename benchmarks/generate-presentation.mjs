@@ -1213,7 +1213,7 @@ async function buildPresentation() {
     const slide = pptx.addSlide();
     addSlideHeader(
       slide,
-      'Cross-Study Results IV: Total Blocking Time (TBT [ms], Lower is Better)',
+      'Cross-Study Results IV: Total Blocking Time (TBT, Lower is Better)',
       '5. Cross-Study Comparison vs. Fahrudin et al. (2025) [Ref 17]'
     );
     addSlideFooter(slide, 12);

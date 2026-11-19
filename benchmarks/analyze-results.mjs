@@ -258,11 +258,12 @@ function main() {
     {
       filename: 'chart-tbt.svg',
       metric: 'tbt_ms',
+      valueScale: 0.001,
       title: 'Total Blocking Time (TBT) Across Variable Data Loads (Lower is Better)',
       subtitle: 'Hydration Tax vs. Zero-JS Islands vs. SSR/CSR Baselines from Fahrudin et al. (2025) [Ref 17]',
-      yLabel: 'Total Blocking Time (Milliseconds)',
-      maxYOverride: 5000,
-      yTicksOverride: 5
+      yLabel: 'Total Blocking Time (Seconds)',
+      maxYOverride: 8,
+      yTicksOverride: 4
     },
     {
       filename: 'chart-si.svg',
@@ -276,41 +277,43 @@ function main() {
   ];
 
   for (const cfg of chartConfigs) {
+    const scale = cfg.valueScale ?? 1;
+    const scaleVal = (v) => (typeof v === 'number' ? Number((v * scale).toFixed(4)) : null);
     const series = [
       {
         label: 'Astro Jamstack (Islands) [Own Study]',
         color: '#059669',
         dashed: false,
         isOwn: true,
-        values: stages.map((st) => getOwnStat('astro-islands', st)?.[`${cfg.metric}_mean`] ?? null)
+        values: stages.map((st) => scaleVal(getOwnStat('astro-islands', st)?.[`${cfg.metric}_mean`]))
       },
       {
         label: 'Next.js Jamstack (SSG + Hydration) [Own Study]',
         color: '#2563eb',
         dashed: false,
         isOwn: true,
-        values: stages.map((st) => getOwnStat('nextjs-ssg', st)?.[`${cfg.metric}_mean`] ?? null)
+        values: stages.map((st) => scaleVal(getOwnStat('nextjs-ssg', st)?.[`${cfg.metric}_mean`]))
       },
       {
         label: 'Laravel Blade (SSR) [Fahrudin et al., 2025]',
         color: '#dc2626',
         dashed: true,
         isOwn: false,
-        values: stages.map((st) => FAHRUDIN_2025_REF['blade-ssr'].stages[st]?.[cfg.metric] ?? null)
+        values: stages.map((st) => scaleVal(FAHRUDIN_2025_REF['blade-ssr'].stages[st]?.[cfg.metric]))
       },
       {
         label: 'React (SPA / CSR) [Fahrudin et al., 2025]',
         color: '#d97706',
         dashed: true,
         isOwn: false,
-        values: stages.map((st) => FAHRUDIN_2025_REF['react-csr'].stages[st]?.[cfg.metric] ?? null)
+        values: stages.map((st) => scaleVal(FAHRUDIN_2025_REF['react-csr'].stages[st]?.[cfg.metric]))
       },
       {
         label: 'Vue (SPA / CSR) [Fahrudin et al., 2025]',
         color: '#7c3aed',
         dashed: true,
         isOwn: false,
-        values: stages.map((st) => FAHRUDIN_2025_REF['vue-csr'].stages[st]?.[cfg.metric] ?? null)
+        values: stages.map((st) => scaleVal(FAHRUDIN_2025_REF['vue-csr'].stages[st]?.[cfg.metric]))
       }
     ];
 
