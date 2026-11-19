@@ -262,8 +262,8 @@ function main() {
       title: 'Total Blocking Time (TBT) Across Variable Data Loads (Lower is Better)',
       subtitle: 'Hydration Tax vs. Zero-JS Islands vs. SSR/CSR Baselines from Fahrudin et al. (2025) [Ref 17]',
       yLabel: 'Total Blocking Time (Seconds)',
-      maxYOverride: 8,
-      yTicksOverride: 4
+      maxYOverride: 5,
+      yTicksOverride: 5
     },
     {
       filename: 'chart-si.svg',
