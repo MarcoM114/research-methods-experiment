@@ -6,13 +6,33 @@
 
 ---
 
-## 1. Projektziel & Präzisierte Research Question (Topic #14)
+## 1. Seminar Paper & Reproducibility Quickstart (Empirical Code Submission)
 
-Dieses Repository enthält den vollständigen experimentellen Versuchsaufbau, die beiden **Jamstack-Benchmark-Prototypen (Next.js SSG vs. Astro Islands)**, die automatisierte **Google-Lighthouse-Messpipeline** sowie die **fertige wissenschaftliche Ausarbeitung** zum Thema:
-> **Topic #14:** *Evaluate the impact of web application architecture on performance. Provide technical advice for scalable design of a specific web application architecture.*
+This repository accompanies our seminar paper (**Topic #14**: *Evaluate the impact of web application architecture on performance. Provide technical advice for scalable design of a specific web application architecture.*):
 
-### Präzisierte Forschungsfrage (Refined Research Question)
-> *"How do modern Jamstack rendering architectures—specifically Static Site Generation with full React hydration (Next.js) versus Zero-JS Islands Architecture (Astro)—impact Core Web Vitals (FCP, LCP, TBT, CLS) and Speed Index under scaling data loads ($10$ to $10,000$ entries) compared to traditional Server-Side Rendering (Laravel Blade) and Client-Side Rendering (React, Vue), and what technical design guidelines can be derived for scalable web applications?"*
+- **Final Seminar Paper (IEEE A4 Template, ≤ 3 pages excl. References):** [`paper/Seminar_Paper_TeamB_Group4.docx`](./paper/Seminar_Paper_TeamB_Group4.docx) (reproducible via `python3 paper/build_paper.py` from [`paper/conference-template-a4.docx`](./paper/conference-template-a4.docx))
+- **Refined Research Question:** *"How do modern Jamstack rendering architectures—SSG with full React hydration (Next.js) versus Zero-JS Islands Architecture (Astro)—impact Core Web Vitals (FCP, LCP, TBT, CLS) and Speed Index (SI) under scaling data loads (10 to 10,000 entries) compared to traditional SSR (Laravel Blade) and CSR (React, Vue), and what technical guidelines can be derived for scalable web applications?"*
+
+### Brief Instructions to Run & Reproduce Presented Results
+**Prerequisites:** Node.js `≥ 20` (tested on `v24.22.2`), npm, Google Chrome / Chromium (tested on `156.0.8078.79`), and optionally Python `3.10+` (`pillow`) to rebuild the `.docx`.
+
+```bash
+# 1. Install root & prototype dependencies (Next.js 15.5.29 / React 19.3.1, Astro 5.18.2, Lighthouse 12.8.2)
+npm install
+npm --prefix apps/jamstack-nextjs install
+npm --prefix apps/jamstack-astro install
+
+# 2. Generate the 7 deterministic datasets (SEED = 20261110, N = 10..10,000) & compile production SSG builds
+npm run build
+
+# 3. Execute all 70 automated Google Lighthouse Desktop audits (2 architectures × 7 stages × 5 runs)
+npm run benchmark
+
+# 4. Aggregate statistics (mean, SD, median), cross-study tables, and zero-baseline charts
+npm run analyze
+```
+
+All raw 70-run logs and summary tables used in the paper are pre-saved in [`benchmarks/results/raw-runs.csv`](./benchmarks/results/raw-runs.csv), [`benchmarks/results/raw-runs.json`](./benchmarks/results/raw-runs.json), and [`benchmarks/results/summary-stats.csv`](./benchmarks/results/summary-stats.csv).
 
 ---
 
@@ -20,12 +40,14 @@ Dieses Repository enthält den vollständigen experimentellen Versuchsaufbau, di
 
 | Dokument / Pfad | Beschreibung |
 | :--- | :--- |
-| **[`ausarbeitung-methodik-und-ergebnisse.md`](./ausarbeitung-methodik-und-ergebnisse.md)** | **Fertige wissenschaftliche Ausarbeitung (Paper-Textvorlage)** inkl. *Abstract* (Past Tense, Passive Voice), *Scenario*, *Methodology* (DOT-Framework + alle 4 Benchmarking-Fragen aus Vorlesung 04), *Results* & *Technical Advice*. |
-| **[`benchmarks/results/comparison-report.md`](./benchmarks/results/comparison-report.md)** | **Vollständiger Benchmark-Bericht** ($n = 5$ Runs pro Stufe, $\mu \pm \sigma$) im direkten Vergleich mit **Fahrudin et al. (2025) [Ref 17]** (*Blade SSR, React CSR, Vue CSR*) inkl. SVG-Diagrammen. |
+| **[`paper/Seminar_Paper_TeamB_Group4.docx`](./paper/Seminar_Paper_TeamB_Group4.docx)** | **Finales Seminar Paper** im verbindlichen zweispaltigen IEEE-A4-Template (3 Seiten exkl. References, inkl. Tabellen, Diagramme & Formeln). |
+| **[`paper/build_paper.py`](./paper/build_paper.py)** | Reproduzierbares Python-Skript zur Generierung des IEEE-Seminar-Papers direkt aus [`paper/conference-template-a4.docx`](./paper/conference-template-a4.docx). |
+| **[`ausarbeitung-methodik-und-ergebnisse.md`](./ausarbeitung-methodik-und-ergebnisse.md)** | Wissenschaftliche Ausarbeitung zu *Abstract*, *Scenario*, *Methodology* (DOT-Framework + 4 Benchmarking-Fragen), *Results* & *Technical Advice*. |
+| **[`benchmarks/results/comparison-report.md`](./benchmarks/results/comparison-report.md)** | **Vollständiger Benchmark-Bericht** ($n = 5$ Runs pro Stufe, $\mu \pm \sigma$) im direkten Vergleich mit **Fahrudin et al. (2025) [1]** (*Blade SSR, React CSR, Vue CSR*). |
 | **[`benchmarks/results/summary-stats.csv`](./benchmarks/results/summary-stats.csv)** | Aggregierte statistische Kennzahlen (Mittelwert $\mu$, Standardabweichung $\sigma$, Median) über alle 7 Datenlast-Stufen (`10` bis `10.000`). |
 | **[`benchmarks/results/raw-runs.csv`](./benchmarks/results/raw-runs.csv)** | Alle **70 Einzelmessungen** (`2 Architekturen × 7 Datenstufen × 5 Wiederholungen`) als Rohdaten-CSV und JSON (`raw-runs.json`). |
-| **[`architektur-uebersicht.md`](./architektur-uebersicht.md)** | Verständliche Team-Übersicht zu **CSR (SPA)**, **SSR**, **Jamstack (SSG)** und **Islands Architecture** inkl. Vor-/Nachteilen. |
-| **[`AGENTS.md`](./AGENTS.md)** | Vollständiger Projekt-Kontext, Vorlesungsanforderungen (*03-Methodology* & *04-Documentation*) und Referenzwerte aus [17]. |
+| **[`architektur-uebersicht.md`](./architektur-uebersicht.md)** | Team-Übersicht zu **CSR (SPA)**, **SSR**, **Jamstack (SSG)** und **Islands Architecture** inkl. Vor-/Nachteilen. |
+| **[`AGENTS.md`](./AGENTS.md)** | Projekt-Kontext und Vorlesungsanforderungen (*03-Methodology* & *04-Documentation*). |
 
 ---
 
@@ -55,7 +77,7 @@ research-methods-experiment/
 │   ├── jamstack-nextjs/          # Next.js 15 (Static Export + Full React Hydration)
 │   └── jamstack-astro/           # Astro 5 (Static Build + Zero-JS Table & Filter Island)
 ├── data/
-│   ├── generate-data.mjs         # Deterministischer PRNG-Generator (Seed: 20260414)
+│   ├── generate-data.mjs         # Deterministischer PRNG-Generator (Seed: 20261110)
 │   └── generated/                # Generierte JSON-Datensätze (10..10.000 Einträge)
 ├── shared/
 │   └── styles.css                # Gemeinsames Ceteris-Paribus CSS-Stylesheet
@@ -63,6 +85,11 @@ research-methods-experiment/
 │   ├── run-lighthouse.mjs        # Automatisierter Google Lighthouse Desktop Runner (n=5)
 │   ├── analyze-results.mjs       # Statistik-Auswertung (Mean, SD, Median) & SVG-Generator
 │   └── results/                  # Rohdaten (CSV/JSON), Tabellen & SVG-Liniendiagramme
+├── paper/
+│   ├── conference-template-a4.docx          # Verbindliche IEEE-A4-Vorlage
+│   ├── build_paper.py                       # Reproduzierbares Paper-Build-Skript
+│   ├── figures/                             # Eingebettete High-Res-Diagramme (LCP, TBT)
+│   └── Seminar_Paper_TeamB_Group4.docx      # Finales Seminar Paper (≤ 3 Seiten exkl. Refs)
 ├── ausarbeitung-methodik-und-ergebnisse.md
 ├── architektur-uebersicht.md
 ├── naechstes-vorgehen.md
@@ -111,7 +138,7 @@ npm run start:astro
 ```
 
 #### Verfügbare Seiten / URLs in beiden Apps:
-Auf der Startseite (`http://localhost:3001` bzw. `http://localhost:3002`) könnt ihr oben über die Navigationsleiste direkt zwischen allen **7 Datenlast-Stufen** wechseln und auch die **Such-/Filterfunktion sowie den Sortier-Button** ausprobieren:
+Auf der Startseite (`http://localhost:3001` bzw. `http://localhost:3002`) könnt ihr oben über die Navigationsleiste direkt zwischen allen **7 Datenlast-Stufen** wechseln und auch die **Such-/Filterfunktion sowie den Flag-Button** ausprobieren:
 - `/assessments/10` (10 Einträge)
 - `/assessments/50` (50 Einträge)
 - `/assessments/100` (100 Einträge)
@@ -133,15 +160,17 @@ npm run build
 # 2. Automatisierten Google Lighthouse Benchmark starten (Standard: n=5 Durchläufe pro Stufe = 70 Runs)
 npm run benchmark
 
-# 3. Statistische Auswertung, Vergleichstabellen mit [17] & SVG-Diagramme generieren
+# 3. Statistische Auswertung, Vergleichstabellen & SVG-Diagramme generieren
 npm run analyze
 ```
 
 ---
 
-## 5. Referenzierte Primärstudien
-1. **Fahrudin, T. M., Wijaya, I. D., & Nasyuha, A. H. (2025) [Ref 17]:** *Performance Comparison of Blade, Vue, and React Under Variable Data Loads*. 2025 International Conference on Computer Science, Information Technology and Engineering (ICCoSITE), IEEE, pp. 904–909. doi: `10.1109/ICCoSITE64204.2025.10939821`.
-2. **Lonka, O. (2023) [Ref 30]:** *Performance comparison of two full-stack web frameworks: Astro and Next.js*. Bachelor's Thesis, University of Oulu.
-3. **Yavuz, T., & Miladinovic, I. (2023) [Ref 2]:** *Rendering Performance Analysis of Modern JavaScript Frameworks*. ICICT 2023.
-4. **Đurić, M. (2025) [Ref 20]:** *Comparative Analysis of Client-Side and Server-Side Rendering in React Web Applications*.
-5. **Shitov, I. (2025) [Ref 6]:** *Comparative Performance Analysis of Client-Side and Server-Side Rendering across Varying Hardware Configurations*.
+## 5. Key Referenced Primary Studies (IEEE Style, Matching Seminar Paper)
+1. M. Fahrudin, T. F. Kusumasari, and E. N. Alam, "A performance comparison of frontend rendering strategies in Laravel applications," in *Proc. 9th Int. Conf. Electrical, Electronics and Information Engineering (ICEEIE)*, Mataram, Indonesia, 2025, pp. 1–6, doi: `10.1109/ICEEIE66203.2025.11252452`.
+2. S. Yavuz and I. Miladinovic, "Analyse von Rendering-Techniken in Webapplikationen und deren Anwendungsfälle," Master's thesis, Univ. of Applied Sciences Campus Vienna (FH Campus Wien), Vienna, Austria, 2023.
+3. T. Lonka, "Improving the initial rendering performance of React applications through contemporary rendering approaches," M.S. thesis, School of Science, Aalto Univ., Espoo, Finland, 2023.
+4. D. P. Mishra, K. Muduli, D. S. Sahoo, R. K. Barik, P. Giri, and A. K. Muduli, "Astro's web architecture: A paradigm shift in performance-optimized web development," in *Proc. Int. Conf. Cognitive, Green and Ubiquitous Computing (IC-CGU)*, Bhubaneswar, India, 2025, pp. 1–5, doi: `10.1109/ICCGU67042.2025.11338002`.
+5. N. Shitov, "Comparative analysis of server-side versus client-side rendering," Bachelor's thesis, Czech Univ. of Life Sciences Prague, Prague, Czech Republic, 2025.
+6. Z. Đurić, "Comparative analysis of server-side rendering: React vs. Next.js," Bachelor's thesis, Metropolia Univ. of Applied Sciences, Helsinki, Finland, 2025.
+7. M. Savenko and K. Babii, "Performance optimization strategies for large-scale web applications using Next.js," *IEEE Access*, vol. 13, pp. 217376–217386, 2025, doi: `10.1109/ACCESS.2025.3647563`.
